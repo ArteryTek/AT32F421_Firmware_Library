@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     at32f421_int.c
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    main interrupt service routines.
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -30,7 +30,7 @@
 /** @addtogroup AT32F421_periph_examples
   * @{
   */
-  
+
 /** @addtogroup 421_TMR_oc_low
   * @{
   */
@@ -139,26 +139,26 @@ void SysTick_Handler(void)
   */
 void TMR3_GLOBAL_IRQHandler(void)
 {
-  if(tmr_flag_get(TMR3, TMR_C1_INT) != RESET)
+  if(tmr_flag_get(TMR3, TMR_C1_FLAG) != RESET)
   {
     /* clear tmr3 channel1 interrupt pending bit */
-    tmr_flag_clear(TMR3, TMR_C1_INT);
+    tmr_flag_clear(TMR3, TMR_C1_FLAG);
 
     /* pa.00 turnoff after 1000 ms */
     gpio_bits_set(GPIOA, GPIO_PINS_0);
   }
-  else if(tmr_flag_get(TMR3, TMR_C2_INT) != RESET)
+  else if(tmr_flag_get(TMR3, TMR_C2_FLAG) != RESET)
   {
     /* clear tmr3 channel2 interrupt pending bit */
-    tmr_flag_clear(TMR3, TMR_C2_INT);
+    tmr_flag_clear(TMR3, TMR_C2_FLAG);
 
     /* pa.01 turnoff after 500 ms */
     gpio_bits_set(GPIOA, GPIO_PINS_1);
   }
-  else if(tmr_flag_get(TMR3, TMR_C3_INT) != RESET)
+  else if(tmr_flag_get(TMR3, TMR_C3_FLAG) != RESET)
   {
     /* clear tmr2 channel3 interrupt pending bit */
-    tmr_flag_clear(TMR3, TMR_C3_INT);
+    tmr_flag_clear(TMR3, TMR_C3_FLAG);
 
     /* pa.02 turnoff after 250 ms */
     gpio_bits_set(GPIOA, GPIO_PINS_2);
@@ -166,7 +166,7 @@ void TMR3_GLOBAL_IRQHandler(void)
   else
   {
     /* clear tmr3 channel4 interrupt pending bit */
-    tmr_flag_clear(TMR3, TMR_C4_INT);
+    tmr_flag_clear(TMR3, TMR_C4_FLAG);
 
     /* pa.03 turnoff after 125 ms */
     gpio_bits_set(GPIOA, GPIO_PINS_3);
@@ -175,8 +175,8 @@ void TMR3_GLOBAL_IRQHandler(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */

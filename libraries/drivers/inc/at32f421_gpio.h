@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_gpio.h
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    at32f421 gpio header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -468,7 +468,7 @@ typedef struct
   };
 
   /**
-    * @brief gpio wpen register, offset:0x1C
+    * @brief gpio wpr register, offset:0x1C
     */
   union
   {
@@ -535,7 +535,7 @@ typedef struct
   };
 
   /**
-    * @brief gpio iocb register, offset:0x28
+    * @brief gpio clr register, offset:0x28
     */
   union
   {

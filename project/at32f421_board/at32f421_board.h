@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_board.h
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    header file for at-start board. set of firmware functions to 
   *           manage leds and push-button. initialize delay function.
   **************************************************************************
@@ -32,6 +32,7 @@
 extern "C" {
 #endif
 
+#include "stdio.h"
 #include "at32f421.h"
 
 /** @addtogroup AT32F421_board
@@ -80,6 +81,15 @@ typedef enum
 #define LED4_GPIO_CRM_CLK                CRM_GPIOB_PERIPH_CLOCK
 #endif
 
+/**************** define print uart ******************/
+#define PRINT_UART                       USART1
+#define PRINT_UART_CRM_CLK               CRM_USART1_PERIPH_CLOCK
+#define PRINT_UART_TX_PIN                GPIO_PINS_9
+#define PRINT_UART_TX_GPIO               GPIOA
+#define PRINT_UART_TX_GPIO_CRM_CLK       CRM_GPIOA_PERIPH_CLOCK
+#define PRINT_UART_TX_PIN_SOURCE         GPIO_PINS_SOURCE9
+#define PRINT_UART_TX_PIN_MUX_NUM        GPIO_MUX_1
+
 /******************* define button *******************/
 typedef enum
 {
@@ -118,6 +128,9 @@ void delay_init(void);
 void delay_us(uint32_t nus);
 void delay_ms(uint16_t nms);
 void delay_sec(uint16_t sec);
+
+/* printf uart init function */
+void uart_print_init(uint32_t baudrate);
 
 /**
   * @}

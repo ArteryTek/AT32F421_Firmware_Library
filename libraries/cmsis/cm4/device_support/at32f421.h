@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421.h
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    at32f421 header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -60,7 +60,7 @@ extern "C" {
     !defined (AT32F421K4U7_4) && !defined (AT32F421F4P7) && !defined (AT32F421G4U7) && \
     !defined (AT32F421PF8P7)  && !defined (AT32F421PF4P7)
 
-    #error "Please select first the target at32f4xx device used in your application (in at32f4xx.h file)"
+    #error "Please select first the target device used in your application (in at32f421.h file)"
 #endif
 
 #if defined (AT32F421C8T7)   || defined (AT32F421K8T7) || defined (AT32F421K8U7) || \
@@ -93,7 +93,7 @@ extern "C" {
   */
 #define __AT32F421_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
 #define __AT32F421_LIBRARY_VERSION_MIDDLE   (0x00) /*!< [23:16] middle version */
-#define __AT32F421_LIBRARY_VERSION_MINOR    (0x01) /*!< [15:8]  minor version */
+#define __AT32F421_LIBRARY_VERSION_MINOR    (0x03) /*!< [15:8]  minor version */
 #define __AT32F421_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
 #define __AT32F421_LIBRARY_VERSION          ((__AT32F421_LIBRARY_VERSION_MAJOR << 24)  | \
                                              (__AT32F421_LIBRARY_VERSION_MIDDLE << 16) | \
@@ -318,7 +318,8 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 /**
   * @}
   */
-  
+
+#include "at32f421_def.h"
 #include "at32f421_conf.h"
 
 #ifdef __cplusplus

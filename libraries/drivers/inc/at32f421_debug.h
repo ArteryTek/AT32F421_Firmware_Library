@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_debug.h
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    at32f421 debug header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -64,8 +64,6 @@ extern "C" {
 #define DEBUG_TMR16_PAUSE                0x00800000 /*!< debug timer16 pause */
 #define DEBUG_TMR17_PAUSE                0x01000000 /*!< debug timer17 pause */ 
 #define DEBUG_TMR14_PAUSE                0x08000000 /*!< debug timer14 pause */ 
-
-
 
 /**
   * @}
@@ -132,7 +130,7 @@ typedef struct
   * @}
   */
 
-#define DEBUG                           ((debug_type *) DEBUG_BASE)
+#define DEBUGMCU                         ((debug_type *) DEBUG_BASE)
 
 /** @defgroup DEBUG_exported_functions
   * @{

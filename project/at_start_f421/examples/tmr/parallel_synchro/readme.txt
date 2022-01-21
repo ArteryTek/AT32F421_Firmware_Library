@@ -1,13 +1,13 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    readme
   **************************************************************************
   */
 
-  this demo is based on the at-start board, in this demo, pa6, pa0 and pb6
+  this demo is based on the at-start board, in this demo, pa6, pa2 and pa8
   output pwm waveform. the tmrxclk is fixed to 120 mhz, the tmr3 counter clock
   is 120 mhz.
   the master tmrer tmr3 is running at 375 khz and the duty cycle is equal to 20%

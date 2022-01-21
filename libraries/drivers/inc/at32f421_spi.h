@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_spi.h
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    at32f421 spi header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -122,8 +122,8 @@ typedef enum
   */
 typedef enum
 {
-  SPI_CS_HARDWARE_MODE                   = 0x00, /*!< cs is software mode */
-  SPI_CS_SOFTWARE_MODE                   = 0x01  /*!< cs is hardware mode */
+  SPI_CS_HARDWARE_MODE                   = 0x00, /*!< cs is hardware mode */
+  SPI_CS_SOFTWARE_MODE                   = 0x01  /*!< cs is software mode */
 } spi_cs_mode_type;
 
 /**

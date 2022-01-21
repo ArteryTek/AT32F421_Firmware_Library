@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_int.c
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    main interrupt service routines.
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -147,33 +147,33 @@ void SysTick_Handler(void)
 void TMR3_GLOBAL_IRQHandler(void)
 {
   /* TMR3_CH1 toggling with frequency = 183.1 Hz */
-  if(tmr_flag_get(TMR3, TMR_C1_INT) != RESET)
+  if(tmr_flag_get(TMR3, TMR_C1_FLAG) != RESET)
   {
-    tmr_flag_clear(TMR3, TMR_C1_INT );
+    tmr_flag_clear(TMR3, TMR_C1_FLAG );
     capture = tmr_channel_value_get(TMR3, TMR_SELECT_CHANNEL_1);
     tmr_channel_value_set(TMR3, TMR_SELECT_CHANNEL_1, capture + c1dt_val);
   }
 
   /* TMR3_CH2 toggling with frequency = 366.2 Hz */
-  if(tmr_flag_get(TMR3, TMR_C2_INT) != RESET)
+  if(tmr_flag_get(TMR3, TMR_C2_FLAG) != RESET)
   {
-    tmr_flag_clear(TMR3, TMR_C2_INT);
+    tmr_flag_clear(TMR3, TMR_C2_FLAG);
     capture = tmr_channel_value_get(TMR3, TMR_SELECT_CHANNEL_2);
     tmr_channel_value_set(TMR3, TMR_SELECT_CHANNEL_2, capture + c2dt_val);
   }
 
   /* TMR3_CH3 toggling with frequency = 732.4 Hz */
-  if(tmr_flag_get(TMR3, TMR_C3_INT) != RESET)
+  if(tmr_flag_get(TMR3, TMR_C3_FLAG) != RESET)
   {
-    tmr_flag_clear(TMR3, TMR_C3_INT);
+    tmr_flag_clear(TMR3, TMR_C3_FLAG);
     capture = tmr_channel_value_get(TMR3, TMR_SELECT_CHANNEL_3);
     tmr_channel_value_set(TMR3, TMR_SELECT_CHANNEL_3, capture + c3dt_val);
   }
 
   /* TMR3_CH4 toggling with frequency = 1464.8 Hz */
-  if(tmr_flag_get(TMR3, TMR_C4_INT) != RESET)
+  if(tmr_flag_get(TMR3, TMR_C4_FLAG) != RESET)
   {
-    tmr_flag_clear(TMR3, TMR_C4_INT);
+    tmr_flag_clear(TMR3, TMR_C4_FLAG);
     capture = tmr_channel_value_get(TMR3, TMR_SELECT_CHANNEL_4);
     tmr_channel_value_set(TMR3, TMR_SELECT_CHANNEL_4, capture + c4dt_val);
   }

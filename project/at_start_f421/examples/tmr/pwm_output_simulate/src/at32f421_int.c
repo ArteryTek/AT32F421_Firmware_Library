@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_int.c
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    main interrupt service routines.
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -141,27 +141,27 @@ void SysTick_Handler(void)
 
 void TMR3_GLOBAL_IRQHandler(void)
 {
-  if(tmr_flag_get(TMR3, TMR_C1_INT) != RESET)
+  if(tmr_flag_get(TMR3, TMR_C1_FLAG) != RESET)
   {
-    tmr_flag_clear(TMR3, TMR_C1_INT );
+    tmr_flag_clear(TMR3, TMR_C1_FLAG );
 
     /* Pin PC.06 toggling with frequency = 73.24 Hz */
     gpio_bits_write(GPIOA, GPIO_PINS_0, (confirm_state)(1 - gpio_output_data_bit_read(GPIOA, GPIO_PINS_0)));
     capture = tmr_channel_value_get(TMR3, TMR_SELECT_CHANNEL_1);
     tmr_channel_value_set(TMR3, TMR_SELECT_CHANNEL_1, capture + c1dt_val);
   }
-  else if(tmr_flag_get(TMR3, TMR_C2_INT) != RESET)
+  else if(tmr_flag_get(TMR3, TMR_C2_FLAG) != RESET)
   {
-    tmr_flag_clear(TMR3, TMR_C2_INT);
+    tmr_flag_clear(TMR3, TMR_C2_FLAG);
 
     /* Pin PC.06 toggling with frequency = 73.24 Hz */
     gpio_bits_write(GPIOA, GPIO_PINS_1, (confirm_state)(1 - gpio_output_data_bit_read(GPIOA, GPIO_PINS_1)));
     capture = tmr_channel_value_get(TMR3, TMR_SELECT_CHANNEL_2);
     tmr_channel_value_set(TMR3, TMR_SELECT_CHANNEL_2, capture + c2dt_val);
   }
-  else if(tmr_flag_get(TMR3, TMR_C3_INT) != RESET)
+  else if(tmr_flag_get(TMR3, TMR_C3_FLAG) != RESET)
   {
-    tmr_flag_clear(TMR3, TMR_C3_INT);
+    tmr_flag_clear(TMR3, TMR_C3_FLAG);
 
     /* Pin PC.06 toggling with frequency = 73.24 Hz */
     gpio_bits_write(GPIOA, GPIO_PINS_2, (confirm_state)(1 - gpio_output_data_bit_read(GPIOA, GPIO_PINS_2)));
@@ -170,7 +170,7 @@ void TMR3_GLOBAL_IRQHandler(void)
   }
   else
   {
-    tmr_flag_clear(TMR3, TMR_C4_INT);
+    tmr_flag_clear(TMR3, TMR_C4_FLAG);
 
     /* Pin PC.06 toggling with frequency = 73.24 Hz */
     gpio_bits_write(GPIOA, GPIO_PINS_3, (confirm_state)(1 - gpio_output_data_bit_read(GPIOA, GPIO_PINS_3)));

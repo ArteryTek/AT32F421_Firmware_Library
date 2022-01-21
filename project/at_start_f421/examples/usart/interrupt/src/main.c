@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -43,10 +43,10 @@ uint8_t usart2_tx_buffer[] = "usart transfer by interrupt: usart2 -> usart1 usin
 uint8_t usart1_tx_buffer[] = "usart transfer by interrupt: usart1 -> usart2 using interrupt";
 uint8_t usart2_rx_buffer[USART1_TX_BUFFER_SIZE];
 uint8_t usart1_rx_buffer[USART2_TX_BUFFER_SIZE];
-uint8_t usart2_tx_counter = 0x00;
-uint8_t usart1_tx_counter = 0x00;
-uint8_t usart2_rx_counter = 0x00; 
-uint8_t usart1_rx_counter = 0x00;
+volatile uint8_t usart2_tx_counter = 0x00;
+volatile uint8_t usart1_tx_counter = 0x00;
+volatile uint8_t usart2_rx_counter = 0x00; 
+volatile uint8_t usart1_rx_counter = 0x00;
 uint8_t usart2_tx_buffer_size = USART2_TX_BUFFER_SIZE;
 uint8_t usart1_tx_buffer_size = USART1_TX_BUFFER_SIZE;
 

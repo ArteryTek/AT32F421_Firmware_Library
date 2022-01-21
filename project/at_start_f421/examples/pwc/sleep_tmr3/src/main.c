@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.1
-  * @date     2021-11-26
+  * @version  v2.0.3
+  * @date     2021-12-31
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -27,7 +27,6 @@
 #include "at32f421_board.h"
 #include "at32f421_clock.h"
 
-
 /** @addtogroup AT32F421_periph_examples
   * @{
   */
@@ -35,8 +34,7 @@
 /** @addtogroup 421_PWC_sleep_tmr3 PWC_sleep_tmr3
   * @{
   */
-  
-  
+
 /**
   * @brief  tmr3 configuration.
   * @param  none

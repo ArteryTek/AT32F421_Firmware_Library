@@ -1215,6 +1215,9 @@
             <name>$PROJ_DIR$\..\..\..\..\libraries\drivers\src\at32f421_crm.c</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\..\..\libraries\drivers\src\at32f421_usart.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\..\..\libraries\drivers\src\at32f421_flash.c</name>
         </file>
         <file>

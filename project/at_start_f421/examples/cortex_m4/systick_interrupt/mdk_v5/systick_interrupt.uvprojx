@@ -427,6 +427,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\libraries\drivers\src\at32f421_crm.c</FilePath>
             </File>
+            <File>
+              <FileName>at32f421_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\libraries\drivers\src\at32f421_usart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
