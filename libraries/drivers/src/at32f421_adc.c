@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_adc.c
-  * @version  v2.0.3
-  * @date     2021-12-31
+  * @version  v2.0.4
+  * @date     2022-02-11
   * @brief    contains all the functions for the adc firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -72,26 +72,6 @@ void adc_enable(adc_type *adc_x, confirm_state new_state)
   adc_x->ctrl2_bit.adcen = new_state;
 }
 
-/**
-  * @brief  select combine mode of the specified adc peripheral.
-  * @param  combine_mode: select the adc combine mode.
-  *         this parameter can be one of the following values:
-  *         - ADC_INDEPENDENT_MODE
-  *         - ADC_ORDINARY_SMLT_PREEMPT_SMLT_MODE
-  *         - ADC_ORDINARY_SMLT_PREEMPT_INTERLTRIG_MODE
-  *         - ADC_ORDINARY_SHORTSHIFT_PREEMPT_SMLT_MODE
-  *         - ADC_ORDINARY_LONGSHIFT_PREEMPT_SMLT_MODE
-  *         - ADC_PREEMPT_SMLT_ONLY_MODE
-  *         - ADC_ORDINARY_SMLT_ONLY_MODE
-  *         - ADC_ORDINARY_SHORTSHIFT_ONLY_MODE
-  *         - ADC_ORDINARY_LONGSHIFT_ONLY_MODE
-  *         - ADC_PREEMPT_INTERLTRIG_ONLY_MODE
-  * @retval none
-  */
-void adc_combine_mode_select(adc_combine_mode_type combine_mode)
-{
-    ADC1->ctrl1_bit.mssel = combine_mode;
-}
 
 /**
   * @brief  adc base default para init.
@@ -817,15 +797,6 @@ flag_status adc_preempt_software_trigger_status_get(adc_type *adc_x)
 uint16_t adc_ordinary_conversion_data_get(adc_type *adc_x)
 {
   return (uint16_t)(adc_x->odt_bit.odt);
-}
-
-/**
-  * @brief  return the last conversion data for ordinary channel of combine adc.
-  * @retval the last conversion data for ordinary channel.
-  */
-uint32_t adc_combine_ordinary_conversion_data_get(void)
-{
-  return (uint32_t)(ADC1->odt);
 }
 
 /**

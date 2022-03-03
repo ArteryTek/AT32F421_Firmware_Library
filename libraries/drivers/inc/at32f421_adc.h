@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_adc.h
-  * @version  v2.0.3
-  * @date     2021-12-31
+  * @version  v2.0.4
+  * @date     2022-02-11
   * @brief    at32f421 adc header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -75,23 +75,6 @@ extern "C" {
 /** @defgroup ADC_exported_types
   * @{
   */
-
-/**
-  * @brief adc combine mode type(these options are must be ADC_INDEPENDENT_MODE for at32f421) 
-  */
-typedef enum
-{
-  ADC_INDEPENDENT_MODE                      = 0x00, /*!< independent mode */
-  ADC_ORDINARY_SMLT_PREEMPT_SMLT_MODE       = 0x01, /*!< combined ordinary simultaneous + preempt simultaneous mode */
-  ADC_ORDINARY_SMLT_PREEMPT_INTERLTRIG_MODE = 0x02, /*!< combined ordinary simultaneous + preempt interleaved trigger mode */
-  ADC_ORDINARY_SHORTSHIFT_PREEMPT_SMLT_MODE = 0x03, /*!< combined ordinary short shifting + preempt simultaneous mode */
-  ADC_ORDINARY_LONGSHIFT_PREEMPT_SMLT_MODE  = 0x04, /*!< combined ordinary long shifting + preempt simultaneous mode */
-  ADC_PREEMPT_SMLT_ONLY_MODE                = 0x05, /*!< preempt simultaneous mode only */
-  ADC_ORDINARY_SMLT_ONLY_MODE               = 0x06, /*!< ordinary simultaneous mode only */
-  ADC_ORDINARY_SHORTSHIFT_ONLY_MODE         = 0x07, /*!< ordinary short shifting mode only */
-  ADC_ORDINARY_LONGSHIFT_ONLY_MODE          = 0x08, /*!< slow interleaved mode only */
-  ADC_PREEMPT_INTERLTRIG_ONLY_MODE          = 0x09  /*!< alternate trigger mode only */
-} adc_combine_mode_type;
 
 /**
   * @brief adc data align type 
@@ -248,8 +231,7 @@ typedef struct
       __IO uint32_t ocpen                : 1; /* [11] */
       __IO uint32_t pcpen                : 1; /* [12] */
       __IO uint32_t ocpcnt               : 3; /* [15:13] */
-      __IO uint32_t mssel                : 4; /* [19:16] */
-      __IO uint32_t reserved1            : 2; /* [21:20] */      
+      __IO uint32_t reserved1            : 6; /* [21:16] */        
       __IO uint32_t pcvmen               : 1; /* [22] */
       __IO uint32_t ocvmen               : 1; /* [23] */     
       __IO uint32_t reserved2            : 8; /* [31:24] */
@@ -555,7 +537,6 @@ typedef struct
 
 void adc_reset(adc_type *adc_x);
 void adc_enable(adc_type *adc_x, confirm_state new_state);
-void adc_combine_mode_select(adc_combine_mode_type combine_mode);
 void adc_base_default_para_init(adc_base_config_type *adc_base_struct);
 void adc_base_config(adc_type *adc_x, adc_base_config_type *adc_base_struct);
 void adc_dma_mode_enable(adc_type *adc_x, confirm_state new_state);
@@ -583,7 +564,6 @@ flag_status adc_ordinary_software_trigger_status_get(adc_type *adc_x);
 void adc_preempt_software_trigger_enable(adc_type *adc_x, confirm_state new_state);
 flag_status adc_preempt_software_trigger_status_get(adc_type *adc_x);
 uint16_t adc_ordinary_conversion_data_get(adc_type *adc_x);
-uint32_t adc_combine_ordinary_conversion_data_get(void);
 uint16_t adc_preempt_conversion_data_get(adc_type *adc_x, adc_preempt_channel_type adc_preempt_channel);
 flag_status adc_flag_get(adc_type *adc_x, uint8_t adc_flag);
 void adc_flag_clear(adc_type *adc_x, uint32_t adc_flag);

@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_debug.h
-  * @version  v2.0.3
-  * @date     2021-12-31
+  * @version  v2.0.4
+  * @date     2022-02-11
   * @brief    at32f421 debug header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -112,14 +112,14 @@ typedef struct
       __IO uint32_t i2c1_smbus_timeout   : 1;/* [15] */
       __IO uint32_t i2c2_smbus_timeout   : 1;/* [16] */
       __IO uint32_t reserved4            : 2;/* [18:17] */
-      __IO uint32_t tim6_pause           : 1;/* [19] */
+      __IO uint32_t tmr6_pause           : 1;/* [19] */
       __IO uint32_t reserved5            : 1;/* [20] */
       __IO uint32_t ertc_512_pause       : 1;/* [21] */
       __IO uint32_t tmr15_pause          : 1;/* [22] */
       __IO uint32_t tmr16_pause          : 1;/* [23] */
       __IO uint32_t tmr17_pause          : 1;/* [24] */
       __IO uint32_t reserved6            : 2;/* [26:25] */
-      __IO uint32_t tim14_pause          : 1;/* [27] */
+      __IO uint32_t tmr14_pause          : 1;/* [27] */
       __IO uint32_t reserved7            : 4;/* [31:28] */
     } ctrl_bit;
   };

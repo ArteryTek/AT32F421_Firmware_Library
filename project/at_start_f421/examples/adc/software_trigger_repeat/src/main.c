@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.3
-  * @date     2021-12-31
+  * @version  v2.0.4
+  * @date     2022-02-11
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -26,6 +26,9 @@
 
 #include "at32f421_board.h"
 #include "at32f421_clock.h"
+#include <stdio.h>
+
+
 
 /** @addtogroup AT32F421_periph_examples
   * @{
@@ -97,8 +100,6 @@ static void adc_config(void)
   crm_periph_clock_enable(CRM_ADC1_PERIPH_CLOCK, TRUE);
   crm_adc_clock_div_set(CRM_ADC_DIV_6);
 
-  /* select combine mode */
-  adc_combine_mode_select(ADC_INDEPENDENT_MODE);
   adc_base_default_para_init(&adc_base_struct);
   adc_base_struct.sequence_mode = TRUE;
   adc_base_struct.repeat_mode = TRUE;

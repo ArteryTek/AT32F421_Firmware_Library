@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.3
-  * @date     2021-12-31
+  * @version  v2.0.4
+  * @date     2022-02-11
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -26,6 +26,7 @@
 
 #include "at32f421_board.h"
 #include "at32f421_clock.h"
+#include <stdio.h>
 
 /** @addtogroup AT32F421_periph_examples
   * @{
@@ -34,7 +35,8 @@
 /** @addtogroup 421_ADC_exint_trigger_partitioned ADC_exint_trigger_partitioned
   * @{
   */
-
+  
+  
 __IO uint16_t adc1_ordinary_valuetab[3][3] = {0};
 __IO uint16_t adc1_preempt_valuetab[3][3] = {0};
 __IO uint16_t dma_trans_complete_flag = 0;
@@ -144,8 +146,6 @@ static void adc_config(void)
   crm_adc_clock_div_set(CRM_ADC_DIV_6);
   nvic_irq_enable(ADC1_CMP_IRQn, 0, 0);
 
-  /* select combine mode */
-  adc_combine_mode_select(ADC_INDEPENDENT_MODE);
   adc_base_default_para_init(&adc_base_struct);
   adc_base_struct.sequence_mode = TRUE;
   adc_base_struct.repeat_mode = FALSE;
