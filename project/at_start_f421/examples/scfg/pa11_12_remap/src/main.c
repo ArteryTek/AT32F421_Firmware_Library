@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -30,7 +30,7 @@
 /** @addtogroup AT32F421_periph_examples
   * @{
   */
-  
+
 /** @addtogroup 421_SCFG_pa11_12_remap SCFG_pa11_12_remap
   * @{
   */
@@ -60,7 +60,7 @@ void gpio_configuration(void)
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOA, &gpio_init_struct);
- 
+
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE11, GPIO_MUX_2);
 }
 
@@ -76,9 +76,9 @@ void crm_configuration(void)
 
   /* gpioa clock enable */
   crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE);
- 
+
   /* scfg clock enable */
-  crm_periph_clock_enable(CRM_SCFG_PERIPH_CLOCK, TRUE); 
+  crm_periph_clock_enable(CRM_SCFG_PERIPH_CLOCK, TRUE);
 }
 
 /**
@@ -92,10 +92,10 @@ int main(void)
 
   /* peripheral clocks configuration */
   crm_configuration();
-  
+
   /* config function tmr1ch4 with pa11 remap pin pa9 */
   scfg_pa11pa12_pin_remap(SCFG_PA11PA12_TO_PA9PA10);
- 
+
   /* gpio configuration */
   gpio_configuration();
 
@@ -129,8 +129,8 @@ int main(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */

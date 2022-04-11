@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -30,7 +30,7 @@
 /** @addtogroup AT32F421_periph_examples
   * @{
   */
-  
+
 /** @addtogroup 421_TMR_pwm_output_tmr16 TMR_pwm_output_tmr16
   * @{
   */
@@ -61,18 +61,18 @@ void gpio_configuration(void)
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOA, &gpio_init_struct);
-  
+
   gpio_init_struct.gpio_pins = GPIO_PINS_5;
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_pull = GPIO_PULL_NONE;
   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOB, &gpio_init_struct);
-  
-  
+
+
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE6, GPIO_MUX_5);
   gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE5, GPIO_MUX_2);
-  
+
 }
 
 /**
@@ -123,7 +123,7 @@ int main(void)
   tmr_output_channel_buffer_enable(TMR16, TMR_SELECT_CHANNEL_1, TRUE);
 
   tmr_period_buffer_enable(TMR16, TRUE);
-  
+
   /* automatic output enable, stop, dead time and lock configuration */
   tmr_brkdt_default_para_init(&tmr_brkdt_config_struct);
   tmr_brkdt_config_struct.brk_enable = TRUE;
@@ -134,7 +134,7 @@ int main(void)
   tmr_brkdt_config_struct.brk_polarity = TMR_BRK_INPUT_ACTIVE_HIGH;
   tmr_brkdt_config_struct.wp_level = TMR_WP_LEVEL_3;
   tmr_brkdt_config(TMR16, &tmr_brkdt_config_struct);
-  
+
   /* output enable */
   tmr_output_enable(TMR16, TRUE);
 
@@ -148,8 +148,8 @@ int main(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */

@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     at32f421_crm.h
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    at32f421 crm header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -43,15 +43,15 @@ extern "C" {
 /** @addtogroup CRM
   * @{
   */
-  
+
 #define CRM_REG(value)                   PERIPH_REG(CRM_BASE, value)
 #define CRM_REG_BIT(value)               PERIPH_REG_BIT(value)
-  
-/** @defgroup CRM_flags_definition 
-  * @brief crm flag  
+
+/** @defgroup CRM_flags_definition
+  * @brief crm flag
   * @{
   */
-  
+
 #define CRM_HICK_STABLE_FLAG             MAKE_VALUE(0x00, 1)  /*!< high speed internal clock stable flag */
 #define CRM_HEXT_STABLE_FLAG             MAKE_VALUE(0x00, 17) /*!< high speed external crystal stable flag */
 #define CRM_PLL_STABLE_FLAG              MAKE_VALUE(0x00, 25) /*!< phase locking loop stable flag */
@@ -74,12 +74,12 @@ extern "C" {
 /**
   * @}
   */
-  
+
 /** @defgroup CRM_interrupts_definition
-  * @brief crm interrupt  
+  * @brief crm interrupt
   * @{
   */
-  
+
 #define CRM_LICK_STABLE_INT              ((uint32_t)0x00000100) /*!< low speed internal clock stable interrupt */
 #define CRM_LEXT_STABLE_INT              ((uint32_t)0x00000200) /*!< low speed external crystal stable interrupt */
 #define CRM_HICK_STABLE_INT              ((uint32_t)0x00000400) /*!< high speed internal clock stable interrupt */
@@ -443,7 +443,7 @@ typedef struct
 typedef struct
 {
   /**
-    * @brief crm ctrl register, offset:0x00 
+    * @brief crm ctrl register, offset:0x00
     */
   union
   {
@@ -466,7 +466,7 @@ typedef struct
   };
 
   /**
-    * @brief crm cfg register, offset:0x04 
+    * @brief crm cfg register, offset:0x04
     */
   union
   {
@@ -492,7 +492,7 @@ typedef struct
   };
 
   /**
-    * @brief crm clkint register, offset:0x08 
+    * @brief crm clkint register, offset:0x08
     */
   union
   {
@@ -611,7 +611,7 @@ typedef struct
     struct
     {
       __IO uint32_t scfgcmpen            : 1; /* [0] */
-      __IO uint32_t reserved1            : 8; /* [8:1] */  
+      __IO uint32_t reserved1            : 8; /* [8:1] */
       __IO uint32_t adc1en               : 1; /* [9] */
       __IO uint32_t reserved2            : 1; /* [10] */
       __IO uint32_t tmr1en               : 1; /* [11] */

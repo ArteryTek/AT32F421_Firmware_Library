@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -30,7 +30,7 @@
 /** @addtogroup AT32F421_periph_examples
   * @{
   */
-  
+
 /** @addtogroup 421_ERTC_bpr_domain ERTC_bpr_domain
   * @{
   */
@@ -53,20 +53,20 @@ uint32_t bpr_reg_check(void);
   */
 int main(void)
 {
-  uint32_t temp = 0; 
-  ertc_time_type time;  
-  
-  /* initial system clock */  
-  system_clock_config();  
-  
-  /* initial the nvic priority group */    
+  uint32_t temp = 0;
+  ertc_time_type time;
+
+  /* initial system clock */
+  system_clock_config();
+
+  /* initial the nvic priority group */
 	nvic_priority_group_config(NVIC_PRIORITY_GROUP_4);
 
   /* initialize uart */
   uart_print_init(115200);
 
   printf("\r\nertc bpr domain example\r\n\r\n");
-  
+
   /* enable the pwc clock interface */
   crm_periph_clock_enable(CRM_PWC_PERIPH_CLOCK, TRUE);
 
@@ -77,9 +77,9 @@ int main(void)
   if(bpr_reg_check() == FALSE)
   {
     printf("bpr reg => reset\r\n\r\n");
-    
+
     /* ertc configuration */
-    ertc_config();   
+    ertc_config();
 
     /* write to ertc bpr data registers */
     bpr_reg_write();
@@ -87,23 +87,23 @@ int main(void)
   else
   {
     printf("bpr reg => none reset\r\n\r\n");
-    
+
     /* wait for ertc registers update */
     ertc_wait_update();
   }
-  
+
   while(1)
   {
     /* get the current time */
     ertc_calendar_get(&time);
-    
+
     if(temp != time.sec)
     {
       temp = time.sec;
-      
+
       /* display date format : year-month-day */
-      printf("%02d-%02d-%02d ",time.year, time.month, time.day);      
-      
+      printf("%02d-%02d-%02d ",time.year, time.month, time.day);
+
       /* display time format : hour:min:sec */
       printf("%02d:%02d:%02d\r\n",time.hour, time.min, time.sec);
     }
@@ -119,7 +119,7 @@ void ertc_config(void)
 {
   /* allow access to ertc */
   pwc_battery_powered_domain_access(TRUE);
-  
+
   /* reset ertc domain */
   crm_battery_powered_domain_reset(TRUE);
   crm_battery_powered_domain_reset(FALSE);
@@ -147,15 +147,15 @@ void ertc_config(void)
   /* configure the ertc divider */
   /* ertc second(1hz) = ertc_clk / (div_a + 1) * (div_b + 1) */
   ertc_divider_set(127, 255);
-  
+
   /* configure the ertc hour mode */
   ertc_hour_mode_set(ERTC_HOUR_MODE_24);
-  
+
   /* set date: 2021-05-01 */
   ertc_date_set(21, 5, 1, 5);
-  
+
   /* set time: 12:00:00 */
-  ertc_time_set(12, 0, 0, ERTC_AM); 
+  ertc_time_set(12, 0, 0, ERTC_AM);
 }
 
 /**

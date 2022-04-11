@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_ertc.h
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    at32f421 ertc header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -44,8 +44,8 @@ extern "C" {
   * @{
   */
 
-/** @defgroup ERTC_interrupts_definition 
-  * @brief ertc interrupt  
+/** @defgroup ERTC_interrupts_definition
+  * @brief ertc interrupt
   * @{
   */
 
@@ -57,11 +57,11 @@ extern "C" {
   * @}
   */
 
-/** @defgroup ERTC_flags_definition 
-  * @brief ertc flag  
+/** @defgroup ERTC_flags_definition
+  * @brief ertc flag
   * @{
   */
-  
+
 #define ERTC_ALAWF_FLAG                  ((uint32_t)0x00000001) /*!< ertc alarm a register allows write flag */
 #define ERTC_TADJF_FLAG                  ((uint32_t)0x00000008) /*!< ertc time adjustment flag */
 #define ERTC_INITF_FLAG                  ((uint32_t)0x00000010) /*!< ertc calendar initialization flag */
@@ -86,11 +86,11 @@ extern "C" {
 /**
   * @}
   */
- 
+
 /** @defgroup ERTC_exported_types
   * @{
   */
-  
+
 /**
   * @brief ertc hour mode
   */
@@ -764,7 +764,7 @@ typedef struct
     * @brief ertc reserved register, offset:0x48
     */
   __IO uint32_t reserved4;
-  
+
   /**
     * @brief reserved register, offset:0x4c
     */
@@ -831,12 +831,12 @@ typedef struct
   };
 
 } ertc_type;
- 
+
 /**
   * @}
   */
 
-#define ERTC                              ((ertc_type *) ERTC_BASE)  
+#define ERTC                              ((ertc_type *) ERTC_BASE)
 
 /** @defgroup ERTC_exported_functions
   * @{

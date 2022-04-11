@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     at32f421_pwc.h
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    at32f421 pwc header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -31,8 +31,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
- 
- 
+
+
 /* Includes ------------------------------------------------------------------*/
 #include "at32f421.h"
 
@@ -44,8 +44,8 @@ extern "C" {
   * @{
   */
 
-/** @defgroup PWC_flags_definition 
-  * @brief pwc flag  
+/** @defgroup PWC_flags_definition
+  * @brief pwc flag
   * @{
   */
 
@@ -56,7 +56,7 @@ extern "C" {
 /**
   * @}
   */
-  
+
 /**
   * @brief pwc wakeup pin num definition
   */
@@ -68,9 +68,9 @@ extern "C" {
 /** @defgroup PWC_exported_types
   * @{
   */
-  
+
 /**
-  * @brief pwc pvm voltage type 
+  * @brief pwc pvm voltage type
   */
 typedef enum
 {
@@ -84,7 +84,7 @@ typedef enum
 } pwc_pvm_voltage_type;
 
 /**
-  * @brief pwc sleep enter type 
+  * @brief pwc sleep enter type
   */
 typedef enum
 {
@@ -93,7 +93,7 @@ typedef enum
 } pwc_sleep_enter_type;
 
 /**
-  * @brief pwc deep sleep enter type 
+  * @brief pwc deep sleep enter type
   */
 typedef enum
 {
@@ -102,7 +102,7 @@ typedef enum
 } pwc_deep_sleep_enter_type;
 
 /**
-  * @brief pwc regulator type 
+  * @brief pwc regulator type
   */
 typedef enum
 {
@@ -132,11 +132,11 @@ typedef struct
       __IO uint32_t pvmsel               : 3; /* [7:5] */
       __IO uint32_t bpwen                : 1; /* [8] */
       __IO uint32_t reserved1            : 23;/* [31:9] */
-    } ctrl_bit;  
+    } ctrl_bit;
   };
-  
+
   /**
-    * @brief pwc ctrlsts register, offset:0x04 
+    * @brief pwc ctrlsts register, offset:0x04
     */
   union
   {
@@ -155,33 +155,33 @@ typedef struct
       __IO uint32_t reserved3            : 17;/* [31:15] */
     } ctrlsts_bit;
   };
-  
+
   /**
     * @brief pwc reserved register, offset:0x08~0x1C
     */
   __IO uint32_t reserved1[6];
-  
+
   /**
-    * @brief pwc ctrl2 register, offset:0x20 
+    * @brief pwc ctrl2 register, offset:0x20
     */
   union
   {
     __IO uint32_t ctrl2;
     struct
     {
-      __IO uint32_t reserved1            : 5;/* [4:0] */ 
+      __IO uint32_t reserved1            : 5;/* [4:0] */
       __IO uint32_t vrexlpen             : 1; /* [5] */
-      __IO uint32_t reserved2            : 26;/* [31:6] */ 
+      __IO uint32_t reserved2            : 26;/* [31:6] */
     } ctrl2_bit;
   };
-  
-} pwc_type;  
-  
+
+} pwc_type;
+
 /**
   * @}
   */
 
-#define PWC                              ((pwc_type *) PWC_BASE) 
+#define PWC                              ((pwc_type *) PWC_BASE)
 
 /** @defgroup PWC_exported_functions
   * @{

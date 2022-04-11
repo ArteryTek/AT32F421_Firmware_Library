@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -30,7 +30,7 @@
 /** @addtogroup AT32F421_periph_examples
   * @{
   */
-  
+
 /** @addtogroup 421_USART_transfer_by_dma_polling USART_transfer_by_dma_polling
   * @{
   */
@@ -45,21 +45,21 @@ uint8_t usart2_rx_buffer[USART1_TX_BUFFER_SIZE];
 uint8_t usart1_rx_buffer[USART2_TX_BUFFER_SIZE];
 
 /**
-  * @brief  config usart2 and usart1   
+  * @brief  config usart2 and usart1
   * @param  none
   * @retval none
   */
 void usart_configuration(void)
 {
   gpio_init_type gpio_init_struct;
-  
+
   /* enable the usart2 and gpio clock */
-  crm_periph_clock_enable(CRM_USART2_PERIPH_CLOCK, TRUE);  
+  crm_periph_clock_enable(CRM_USART2_PERIPH_CLOCK, TRUE);
   crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE);
-  
-  /* enable the usart1 and gpio clock */  
-  crm_periph_clock_enable(CRM_USART1_PERIPH_CLOCK, TRUE);  
-  crm_periph_clock_enable(CRM_GPIOB_PERIPH_CLOCK, TRUE);    
+
+  /* enable the usart1 and gpio clock */
+  crm_periph_clock_enable(CRM_USART1_PERIPH_CLOCK, TRUE);
+  crm_periph_clock_enable(CRM_GPIOB_PERIPH_CLOCK, TRUE);
 
   gpio_default_para_init(&gpio_init_struct);
   /* configure the usart2 tx/rx pin */
@@ -71,7 +71,7 @@ void usart_configuration(void)
   gpio_init(GPIOA, &gpio_init_struct);
 
   /* config usart2 iomux */
-  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE2, GPIO_MUX_1); 
+  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE2, GPIO_MUX_1);
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE3, GPIO_MUX_1);
 
   /* configure the usart1 tx/rx pin */
@@ -79,41 +79,41 @@ void usart_configuration(void)
   gpio_init(GPIOB, &gpio_init_struct);
 
   /* config usart1 iomux */
-  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE6, GPIO_MUX_0); 
+  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE6, GPIO_MUX_0);
   gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE7, GPIO_MUX_0);
-  
+
   /* configure usart2 param */
   usart_init(USART2, 115200, USART_DATA_8BITS, USART_STOP_1_BIT);
   usart_transmitter_enable(USART2, TRUE);
   usart_receiver_enable(USART2, TRUE);
   usart_dma_transmitter_enable(USART2, TRUE);
-  usart_dma_receiver_enable(USART2, TRUE);  
+  usart_dma_receiver_enable(USART2, TRUE);
   usart_enable(USART2, TRUE);
-  
+
   /* configure usart1 param */
   usart_init(USART1, 115200, USART_DATA_8BITS, USART_STOP_1_BIT);
   usart_transmitter_enable(USART1, TRUE);
   usart_receiver_enable(USART1, TRUE);
   usart_dma_transmitter_enable(USART1, TRUE);
-  usart_dma_receiver_enable(USART1, TRUE);  
-  usart_enable(USART1, TRUE);  
+  usart_dma_receiver_enable(USART1, TRUE);
+  usart_enable(USART1, TRUE);
 }
 
 /**
-  * @brief  config dma for usart2 and usart1   
+  * @brief  config dma for usart2 and usart1
   * @param  none
   * @retval none
   */
 void dma_configuration(void)
 {
-  dma_init_type dma_init_struct;  
-  
+  dma_init_type dma_init_struct;
+
   /* enable dma1 clock */
-  crm_periph_clock_enable(CRM_DMA1_PERIPH_CLOCK, TRUE);  
-  
+  crm_periph_clock_enable(CRM_DMA1_PERIPH_CLOCK, TRUE);
+
   /* dma1 channel4 for usart2 tx configuration */
   dma_reset(DMA1_CHANNEL4);
-  dma_default_para_init(&dma_init_struct);  
+  dma_default_para_init(&dma_init_struct);
   dma_init_struct.buffer_size = USART2_TX_BUFFER_SIZE;
   dma_init_struct.direction = DMA_DIR_MEMORY_TO_PERIPHERAL;
   dma_init_struct.memory_base_addr = (uint32_t)usart2_tx_buffer;
@@ -128,7 +128,7 @@ void dma_configuration(void)
 
   /* dma1 channel5 for usart2 rx configuration */
   dma_reset(DMA1_CHANNEL5);
-  dma_default_para_init(&dma_init_struct);  
+  dma_default_para_init(&dma_init_struct);
   dma_init_struct.buffer_size = USART1_TX_BUFFER_SIZE;
   dma_init_struct.direction = DMA_DIR_PERIPHERAL_TO_MEMORY;
   dma_init_struct.memory_base_addr = (uint32_t)usart2_rx_buffer;
@@ -143,7 +143,7 @@ void dma_configuration(void)
 
   /* dma1 channel2 for usart1 tx configuration */
   dma_reset(DMA1_CHANNEL2);
-  dma_default_para_init(&dma_init_struct);  
+  dma_default_para_init(&dma_init_struct);
   dma_init_struct.buffer_size = USART1_TX_BUFFER_SIZE;
   dma_init_struct.direction = DMA_DIR_MEMORY_TO_PERIPHERAL;
   dma_init_struct.memory_base_addr = (uint32_t)usart1_tx_buffer;
@@ -158,7 +158,7 @@ void dma_configuration(void)
 
   /* dma1 channel3 for usart1 rx configuration */
   dma_reset(DMA1_CHANNEL3);
-  dma_default_para_init(&dma_init_struct);  
+  dma_default_para_init(&dma_init_struct);
   dma_init_struct.buffer_size = USART2_TX_BUFFER_SIZE;
   dma_init_struct.direction = DMA_DIR_PERIPHERAL_TO_MEMORY;
   dma_init_struct.memory_base_addr = (uint32_t)usart1_rx_buffer;
@@ -170,7 +170,7 @@ void dma_configuration(void)
   dma_init_struct.priority = DMA_PRIORITY_MEDIUM;
   dma_init_struct.loop_mode_enable = FALSE;
   dma_init(DMA1_CHANNEL3, &dma_init_struct);
-  
+
   dma_channel_enable(DMA1_CHANNEL5, TRUE); /* usart2 rx begin dma receiving */
   dma_channel_enable(DMA1_CHANNEL3, TRUE); /* usart1 rx begin dma receiving */
   dma_channel_enable(DMA1_CHANNEL4, TRUE); /* usart2 tx begin dma transmitting */
@@ -209,20 +209,20 @@ int main(void)
   at32_board_init();
   usart_configuration();
   dma_configuration();
-  
-  /* wait dma transmission complete */  
+
+  /* wait dma transmission complete */
   while((dma_flag_get(DMA1_FDT2_FLAG) == RESET) || (dma_flag_get(DMA1_FDT3_FLAG) == RESET) || \
         (dma_flag_get(DMA1_FDT4_FLAG) == RESET) || (dma_flag_get(DMA1_FDT5_FLAG) == RESET));
-  
+
   while(1)
-  { 
-    /* compare data buffer */ 
+  {
+    /* compare data buffer */
     if(buffer_compare(usart2_tx_buffer, usart1_rx_buffer, USART2_TX_BUFFER_SIZE) && \
        buffer_compare(usart1_tx_buffer, usart2_rx_buffer, USART1_TX_BUFFER_SIZE))
     {
       at32_led_toggle(LED2);
       at32_led_toggle(LED3);
-      at32_led_toggle(LED4);      
+      at32_led_toggle(LED4);
       delay_sec(1);
     }
   }
@@ -230,8 +230,8 @@ int main(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */

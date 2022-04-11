@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -52,7 +52,7 @@ volatile uint32_t tx_index = 0, rx_index = 0;
 volatile error_status transfer_status1 = ERROR, transfer_status2 = ERROR;
 
 static void gpio_config(void);
-static void spi_config(void);                           
+static void spi_config(void);
 error_status buffer_compare(uint8_t* pbuffer1, uint8_t* pbuffer2, uint16_t buffer_length);
 
 /**
@@ -60,7 +60,7 @@ error_status buffer_compare(uint8_t* pbuffer1, uint8_t* pbuffer2, uint16_t buffe
   * @param  pbuffer1, pbuffer2: buffers to be compared.
   * @param  buffer_length: buffer's length
   * @retval the result of compare
-  */ 
+  */
 error_status buffer_compare(uint8_t* pbuffer1, uint8_t* pbuffer2, uint16_t buffer_length)
 {
   while(buffer_length--)
@@ -75,7 +75,7 @@ error_status buffer_compare(uint8_t* pbuffer1, uint8_t* pbuffer2, uint16_t buffe
   }
   return SUCCESS;
 }
-                                        
+
 /**
   * @brief  spi configuration.
   * @param  none
@@ -97,14 +97,14 @@ static void spi_config(void)
   spi_init_struct.clock_phase = SPI_CLOCK_PHASE_2EDGE;
   spi_init_struct.cs_mode_selection = SPI_CS_SOFTWARE_MODE;
   spi_init(SPI1, &spi_init_struct);
-  
+
   spi_init_struct.transmission_mode = SPI_TRANSMIT_HALF_DUPLEX_RX;
   spi_init_struct.master_slave_mode = SPI_MODE_SLAVE;
   spi_init(SPI2, &spi_init_struct);
-  
+
   spi_i2s_interrupt_enable(SPI1, SPI_I2S_TDBE_INT, TRUE);
   spi_i2s_interrupt_enable(SPI2, SPI_I2S_RDBF_INT, TRUE);
-  
+
   spi_enable(SPI2, TRUE);
   spi_enable(SPI1, TRUE);
 }
@@ -119,14 +119,14 @@ static void gpio_config(void)
   gpio_init_type gpio_initstructure;
   crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE);
   crm_periph_clock_enable(CRM_GPIOB_PERIPH_CLOCK, TRUE);
-  
+
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE5, GPIO_MUX_0);
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE7, GPIO_MUX_0);
   gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE13, GPIO_MUX_0);
   gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE14, GPIO_MUX_0);
-  
+
   gpio_default_para_init(&gpio_initstructure);
-  
+
   gpio_initstructure.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
   gpio_initstructure.gpio_pull           = GPIO_PULL_DOWN;
   gpio_initstructure.gpio_mode           = GPIO_MODE_MUX;
@@ -167,14 +167,14 @@ int main(void)
   system_clock_config();
   at32_board_init();
   gpio_config();
-  
+
   /* config spi1 send spi2 receive */
   spi_config();
   while(rx_index < BUFFER_SIZE);
-  
+
   /* test result:the data check */
   transfer_status1 = buffer_compare(spi2_rx_buffer, spi1_tx_buffer, BUFFER_SIZE);
-  
+
   /* config spi2 send spi1 receive */
   spi_enable(SPI1, FALSE);
   spi_enable(SPI2, FALSE);
@@ -182,29 +182,29 @@ int main(void)
   tx_index = 0;
   spi_i2s_interrupt_enable(SPI1, SPI_I2S_TDBE_INT, FALSE);
   spi_i2s_interrupt_enable(SPI2, SPI_I2S_RDBF_INT, FALSE);
-  
+
   spi_init_struct.transmission_mode = SPI_TRANSMIT_HALF_DUPLEX_RX;
   spi_init_struct.master_slave_mode = SPI_MODE_MASTER;
   spi_init(SPI1, &spi_init_struct);
-  
+
   spi_init_struct.transmission_mode = SPI_TRANSMIT_HALF_DUPLEX_TX;
   spi_init_struct.master_slave_mode = SPI_MODE_SLAVE;
   spi_init(SPI2, &spi_init_struct);
-  
+
   spi_i2s_interrupt_enable(SPI1, SPI_I2S_RDBF_INT, TRUE);
   spi_i2s_interrupt_enable(SPI2, SPI_I2S_TDBE_INT, TRUE);
   spi_enable(SPI2, TRUE);
   spi_enable(SPI1, TRUE);
   while(rx_index < BUFFER_SIZE);
-  
+
   /* test result:the data check */
   transfer_status2 = buffer_compare(spi1_rx_buffer, spi2_tx_buffer, BUFFER_SIZE);
-  
+
   /* test result indicate:if passed ,led2 lights */
   if((transfer_status1 == SUCCESS) && (transfer_status2 == SUCCESS))
   {
     at32_led_on(LED2);
-  }    
+  }
   else
   {
     at32_led_off(LED2);
@@ -216,9 +216,9 @@ int main(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 

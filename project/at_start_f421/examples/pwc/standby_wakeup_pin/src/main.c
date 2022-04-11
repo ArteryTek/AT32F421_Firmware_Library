@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -77,7 +77,7 @@ int main(void)
 
   at32_led_on(LED4);
   for(index = 0; index < 0xFFFFFF; index++);
-  
+
   /* enable wakeup pin1(pa0), pin2(pc13), pin6(pb5), pin7(pb15)  */
   pwc_wakeup_pin_enable(PWC_WAKEUP_PIN_1 | PWC_WAKEUP_PIN_2 | PWC_WAKEUP_PIN_6 | PWC_WAKEUP_PIN_7, TRUE);
 

@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -31,7 +31,7 @@
 /** @addtogroup AT32F421_periph_examples
   * @{
   */
-  
+
 /** @addtogroup 421_PWC_sleep_usart1 PWC_sleep_usart1
   * @{
   */
@@ -56,22 +56,22 @@ void usart1_config(uint32_t baudrate)
   gpio_init_struct.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
   gpio_init_struct.gpio_mode           = GPIO_MODE_MUX;
   gpio_init_struct.gpio_pull           = GPIO_PULL_NONE;
-  gpio_init_struct.gpio_pins           = GPIO_PINS_9;  
+  gpio_init_struct.gpio_pins           = GPIO_PINS_9;
   gpio_init(GPIOA, &gpio_init_struct);
 
-  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;  
-  gpio_init_struct.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;  
-  gpio_init_struct.gpio_mode           = GPIO_MODE_MUX;    
+  gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
+  gpio_init_struct.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
+  gpio_init_struct.gpio_mode           = GPIO_MODE_MUX;
   gpio_init_struct.gpio_pull           = GPIO_PULL_UP;
   gpio_init_struct.gpio_pins           = GPIO_PINS_10;
   gpio_init(GPIOA, &gpio_init_struct);
-  
+
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE9, GPIO_MUX_1);
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE10, GPIO_MUX_1);
-  
+
   /* configure uart param */
   nvic_irq_enable(USART1_IRQn, 0, 0);
-  
+
   usart_init(USART1, baudrate, USART_DATA_8BITS, USART_STOP_1_BIT);
   usart_parity_selection_config(USART1, USART_PARITY_NONE);
   usart_transmitter_enable(USART1, TRUE);
@@ -142,8 +142,8 @@ int main(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */

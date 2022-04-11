@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     at32f421_debug.h
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    at32f421 debug header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -31,8 +31,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
- 
- 
+
+
 /* Includes ------------------------------------------------------------------*/
 #include "at32f421.h"
 
@@ -49,21 +49,21 @@ extern "C" {
   */
 
 #define DEBUG_SLEEP                      0x00000001 /*!< debug sleep mode */
-#define DEBUG_DEEPSLEEP                  0x00000002 /*!< debug deepsleep mode */ 
-#define DEBUG_STANDBY                    0x00000004 /*!< debug standby mode */ 
-#define DEBUG_WDT_PAUSE                  0x00000100 /*!< debug watchdog timer pause */ 
-#define DEBUG_WWDT_PAUSE                 0x00000200 /*!< debug window watchdog timer pause */  
-#define DEBUG_TMR1_PAUSE                 0x00000400 /*!< debug timer1 pause */ 
-#define DEBUG_TMR3_PAUSE                 0x00001000 /*!< debug timer3 pause */ 
+#define DEBUG_DEEPSLEEP                  0x00000002 /*!< debug deepsleep mode */
+#define DEBUG_STANDBY                    0x00000004 /*!< debug standby mode */
+#define DEBUG_WDT_PAUSE                  0x00000100 /*!< debug watchdog timer pause */
+#define DEBUG_WWDT_PAUSE                 0x00000200 /*!< debug window watchdog timer pause */
+#define DEBUG_TMR1_PAUSE                 0x00000400 /*!< debug timer1 pause */
+#define DEBUG_TMR3_PAUSE                 0x00001000 /*!< debug timer3 pause */
 #define DEBUG_ERTC_PAUSE                 0x00004000 /*!< debug ertc pause */
-#define DEBUG_I2C1_SMBUS_TIMEOUT         0x00008000 /*!< debug i2c1 smbus timeout */ 
-#define DEBUG_I2C2_SMBUS_TIMEOUT         0x00010000 /*!< debug i2c2 smbus timeout */ 
+#define DEBUG_I2C1_SMBUS_TIMEOUT         0x00008000 /*!< debug i2c1 smbus timeout */
+#define DEBUG_I2C2_SMBUS_TIMEOUT         0x00010000 /*!< debug i2c2 smbus timeout */
 #define DEBUG_TMR6_PAUSE                 0x00080000 /*!< debug timer6 pause */
 #define DEBUG_ERTC_512_PAUSE             0x00200000 /*!< debug ertc 512 pause */
 #define DEBUG_TMR15_PAUSE                0x00400000 /*!< debug timer15 pause */
 #define DEBUG_TMR16_PAUSE                0x00800000 /*!< debug timer16 pause */
-#define DEBUG_TMR17_PAUSE                0x01000000 /*!< debug timer17 pause */ 
-#define DEBUG_TMR14_PAUSE                0x08000000 /*!< debug timer14 pause */ 
+#define DEBUG_TMR17_PAUSE                0x01000000 /*!< debug timer17 pause */
+#define DEBUG_TMR14_PAUSE                0x08000000 /*!< debug timer14 pause */
 
 /**
   * @}
@@ -102,8 +102,8 @@ typedef struct
       __IO uint32_t deepsleep_debug      : 1;/* [1] */
       __IO uint32_t standby_debug        : 1;/* [2] */
       __IO uint32_t reserved1            : 5;/* [7:3] */
-      __IO uint32_t wdt_pause            : 1;/* [8] */ 
-      __IO uint32_t wwdt_pause           : 1;/* [9] */ 
+      __IO uint32_t wdt_pause            : 1;/* [8] */
+      __IO uint32_t wwdt_pause           : 1;/* [9] */
       __IO uint32_t tmr1_pause           : 1;/* [10] */
       __IO uint32_t reserved2            : 1;/* [11] */
       __IO uint32_t tmr3_pause           : 1;/* [12] */

@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -135,13 +135,13 @@ void sysclk_config_deep_sleep(void)
 int main(void)
 {
   __IO uint32_t index = 0;
-  
+
   /* enable pwc and bpr clock */
   crm_periph_clock_enable(CRM_PWC_PERIPH_CLOCK, TRUE);
-  
+
   /* congfig the voltage regulator mode.only used with deep sleep mode */
   pwc_voltage_regulate_set(PWC_REGULATOR_EXTRA_LOW_POWER);
-  
+
   system_clock_config();
 
   at32_board_init();

@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     at32f421_scfg.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    contains all the functions for the system config firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -41,18 +41,18 @@
   * @{
   */
 
-/** 
-  * @brief  scfg reset 
+/**
+  * @brief  scfg reset
   * @param  none
   * @retval none
   */
 void scfg_reset(void)
-{ 
+{
   crm_periph_reset(CRM_SCFG_PERIPH_RESET, TRUE);
   crm_periph_reset(CRM_SCFG_PERIPH_RESET, FALSE);
 }
 
-/** 
+/**
   * @brief  scfg infrared config
   * @param  source
   *         this parameter can be one of the following values:
@@ -71,8 +71,8 @@ void scfg_infrared_config(scfg_ir_source_type source, scfg_ir_polarity_type pola
   SCFG->cfg1_bit.ir_pol = polarity;
 }
 
-/** 
-  * @brief  scfg memory address mapping get 
+/**
+  * @brief  scfg memory address mapping get
   * @param  none
   * @retval return parameter can be one of the following values:
   *         - SCFG_MEM_MAP_MAIN_MEMORY
@@ -84,8 +84,8 @@ uint8_t scfg_mem_map_get(void)
   return (uint8_t)SCFG->cfg1_bit.mem_map_sel ;
 }
 
-/** 
-  * @brief  scfg pa11/12 pin remap 
+/**
+  * @brief  scfg pa11/12 pin remap
   * @param  pin_remap
   *         this parameter can be one of the following values:
   *         - SCFG_PA11PA12_NO_REMAP
@@ -97,8 +97,8 @@ void scfg_pa11pa12_pin_remap (scfg_pa11pa12_remap_type pin_remap)
   SCFG->cfg1_bit.pa11_12_rmp = pin_remap;
 }
 
-/** 
-  * @brief  scfg adc dma channel remap 
+/**
+  * @brief  scfg adc dma channel remap
   * @param  dma_channel
   *         this parameter can be one of the following values:
   *         - SCFG_ADC_TO_DMA_CHANNEL_1
@@ -107,11 +107,11 @@ void scfg_pa11pa12_pin_remap (scfg_pa11pa12_remap_type pin_remap)
   */
 void scfg_adc_dma_channel_remap (scfg_adc_dma_remap_type dma_channel)
 {
-  SCFG->cfg1_bit.adc_dma_rmp = dma_channel;    
+  SCFG->cfg1_bit.adc_dma_rmp = dma_channel;
 }
 
-/** 
-  * @brief  scfg usart1 tx dma channel remap 
+/**
+  * @brief  scfg usart1 tx dma channel remap
   * @param  dma_channel
   *         this parameter can be one of the following values:
   *         - SCFG_USART1_TX_TO_DMA_CHANNEL_2
@@ -120,11 +120,11 @@ void scfg_adc_dma_channel_remap (scfg_adc_dma_remap_type dma_channel)
   */
 void scfg_usart1_tx_dma_channel_remap (scfg_usart1_tx_dma_remap_type dma_channel)
 {
-  SCFG->cfg1_bit.usart1_tx_dma_rmp = dma_channel;    
+  SCFG->cfg1_bit.usart1_tx_dma_rmp = dma_channel;
 }
 
-/** 
-  * @brief  scfg usart1 rx dma channel remap 
+/**
+  * @brief  scfg usart1 rx dma channel remap
   * @param  dma_channel
   *         this parameter can be one of the following values:
   *         - SCFG_USART1_RX_TO_DMA_CHANNEL_3
@@ -133,11 +133,11 @@ void scfg_usart1_tx_dma_channel_remap (scfg_usart1_tx_dma_remap_type dma_channel
   */
 void scfg_usart1_rx_dma_channel_remap (scfg_usart1_rx_dma_remap_type dma_channel)
 {
-  SCFG->cfg1_bit.usart1_rx_dma_rmp = dma_channel;    
+  SCFG->cfg1_bit.usart1_rx_dma_rmp = dma_channel;
 }
 
-/** 
-  * @brief  scfg tmr16 dma channel remap 
+/**
+  * @brief  scfg tmr16 dma channel remap
   * @param  dma_channel
   *         this parameter can be one of the following values:
   *         - SCFG_TMR16_TO_DMA_CHANNEL_3
@@ -146,11 +146,11 @@ void scfg_usart1_rx_dma_channel_remap (scfg_usart1_rx_dma_remap_type dma_channel
   */
 void scfg_tmr16_dma_channel_remap (scfg_tmr16_dma_remap_type dma_channel)
 {
-  SCFG->cfg1_bit.tmr16_dma_rmp = dma_channel;    
+  SCFG->cfg1_bit.tmr16_dma_rmp = dma_channel;
 }
 
-/** 
-  * @brief  scfg tmr17 dma channel remap 
+/**
+  * @brief  scfg tmr17 dma channel remap
   * @param  dma_channel
   *         this parameter can be one of the following values:
   *         - SCFG_TMR17_TO_DMA_CHANNEL_1
@@ -159,7 +159,7 @@ void scfg_tmr16_dma_channel_remap (scfg_tmr16_dma_remap_type dma_channel)
   */
 void scfg_tmr17_dma_channel_remap (scfg_tmr17_dma_remap_type dma_channel)
 {
-  SCFG->cfg1_bit.tmr17_dma_rmp = dma_channel;    
+  SCFG->cfg1_bit.tmr17_dma_rmp = dma_channel;
 }
 
 /**

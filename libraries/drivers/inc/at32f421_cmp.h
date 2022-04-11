@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_cmp.h
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    at32f421 cmp header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -197,7 +197,7 @@ typedef struct
     * @brief crm reserved1 register, offset:0x20
     */
   __IO uint32_t reserved1;
-  
+
   /**
     * @brief cmp Glitch filter enable register, offset:0x24
     */
@@ -210,7 +210,7 @@ typedef struct
       __IO uint32_t reserved1            : 31;/* [31:1] */
     } g_filter_en_bit;
   };
-  
+
   /**
     * @brief cmp high pulse count register, offset:0x28
     */
@@ -223,7 +223,7 @@ typedef struct
       __IO uint32_t reserved1            : 26;/* [31:6] */
     } high_pulse_bit;
   };
-  
+
   /**
     * @brief cmp low pulse count register, offset:0x2C
     */

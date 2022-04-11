@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     system_at32f421.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    contains all the functions for cmsis cortex-m4 system source file
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -31,7 +31,7 @@
 /** @addtogroup AT32F421_system
   * @{
   */
-    
+
 #include "at32f421.h"
 
 /** @addtogroup AT32F421_system_private_defines
@@ -76,7 +76,7 @@ void SystemInit (void)
   /* wait sclk switch status */
   while(CRM->cfg_bit.sclksts != CRM_SCLK_HICK);
 
-  /* reset cfg register, include sclk switch, ahbdiv, apb1div, apb2div, adcdiv, 
+  /* reset cfg register, include sclk switch, ahbdiv, apb1div, apb2div, adcdiv,
      clkout pllrcs, pllhextdiv, pllmult, usbdiv and pllrange bits */
   CRM->cfg = 0;
 
@@ -188,7 +188,7 @@ void system_core_clock_update(void)
             pllrcsfreq = HEXT_VALUE;
           }
         }
-        system_core_clock = (pllrcsfreq * pll_ns) / (pll_ms * (0x1 << pll_fr));
+        system_core_clock = (uint32_t)(((uint64_t)pllrcsfreq * pll_ns) / (pll_ms * (0x1 << pll_fr)));
       }
       break;
     default:
@@ -206,7 +206,7 @@ void system_core_clock_update(void)
 /**
   * @}
   */
-  
+
 /**
   * @}
   */

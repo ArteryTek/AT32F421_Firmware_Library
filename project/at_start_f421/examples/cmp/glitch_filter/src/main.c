@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -30,7 +30,7 @@
 /** @addtogroup AT32F421_periph_examples
   * @{
   */
-  
+
 /** @addtogroup 421_CMP_glitch_filter CMP_glitch_filter
   * @{
   */
@@ -44,7 +44,7 @@ void cmp_config(void)
 {
   cmp_init_type cmp_init_struct;
   gpio_init_type gpio_init_struct;
-  
+
   /* gpioa peripheral clock enable */
   crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE);
 
@@ -72,14 +72,14 @@ void cmp_config(void)
   cmp_init_struct.cmp_polarity = CMP_POL_NON_INVERTING;
   cmp_init_struct.cmp_speed = CMP_SPEED_FAST;
   cmp_init_struct.cmp_hysteresis = CMP_HYSTERESIS_NONE;
-  
+
   cmp_init(CMP1_SELECTION, &cmp_init_struct);
 
   cmp_scal_brg_config(CMP_SCAL_BRG_11);
 
   /* enable cmp1 */
   cmp_enable(CMP1_SELECTION, TRUE);
-  
+
   /* filter out 64 pclk(~533.33ns), each pclk is 8.333ns */
   cmp_filter_config(63, 0x00, TRUE);
 }
@@ -96,9 +96,9 @@ void tmr1_pwm_init(void)
 
   crm_periph_clock_enable(CRM_TMR1_PERIPH_CLOCK, TRUE);
   crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE);
-  
+
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE8, GPIO_MUX_2);
-  
+
   gpio_default_para_init(&gpio_init_struct);
   gpio_init_struct.gpio_pins = GPIO_PINS_8;
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
@@ -138,15 +138,15 @@ void tmr1_pwm_init(void)
 int main(void)
 {
   system_clock_config();
-  
+
   at32_board_init();
 
   /* cmp1 configuration */
   cmp_config();
-  
+
   /* tmr1 configuration */
   tmr1_pwm_init();
-  
+
   while (1)
   {
   }

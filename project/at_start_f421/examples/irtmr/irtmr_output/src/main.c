@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -62,7 +62,7 @@ int main(void)
 
   /* gpio configuration */
   gpio_configuration();
-  
+
   /* irtmr configuration */
   scfg_infrared_config(SCFG_IR_SOURCE_TMR16, SCFG_IR_POLARITY_NO_AFFECTE);
 
@@ -84,7 +84,7 @@ int main(void)
   tmr_output_channel_buffer_enable(TMR16, TMR_SELECT_CHANNEL_1, TRUE);
 
   tmr_period_buffer_enable(TMR16, TRUE);
-  
+
   /* TMR17 time base configuration */
   tmr_base_init(TMR17, 65, prescalervalue);
   tmr_cnt_dir_set(TMR17, TMR_COUNT_UP);
@@ -103,7 +103,7 @@ int main(void)
 
   tmr_output_enable(TMR16, TRUE);
   tmr_output_enable(TMR17, TRUE);
-  
+
   /* tmr enable counter */
   tmr_counter_enable(TMR16, TRUE);
   tmr_counter_enable(TMR17, TRUE);
@@ -128,13 +128,13 @@ void gpio_configuration(void)
   gpio_init_struct.gpio_mode = GPIO_MODE_MUX;
   gpio_init_struct.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
   gpio_init(GPIOA, &gpio_init_struct);
-  
+
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE6, GPIO_MUX_5);
   gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE7, GPIO_MUX_5);
-  
+
   gpio_init_struct.gpio_pins = GPIO_PINS_9;
   gpio_init(GPIOB, &gpio_init_struct);
-  
+
   gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE9, GPIO_MUX_0);
 }
 
@@ -147,10 +147,10 @@ void crm_configuration(void)
 {
   /* scfg clock enable */
   crm_periph_clock_enable(CRM_SCFG_PERIPH_CLOCK, TRUE);
-  
+
   /* TMR16 clock enable */
   crm_periph_clock_enable(CRM_TMR16_PERIPH_CLOCK, TRUE);
-  
+
   /* TMR17 clock enable */
   crm_periph_clock_enable(CRM_TMR17_PERIPH_CLOCK, TRUE);
 

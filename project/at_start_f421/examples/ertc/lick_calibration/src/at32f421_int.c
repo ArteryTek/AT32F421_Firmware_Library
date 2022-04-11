@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     at32f421_int.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main interrupt service routines.
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -32,11 +32,11 @@
 /** @addtogroup AT32F421_periph_examples
   * @{
   */
-  
+
 /** @addtogroup 421_ERTC_lick_calibration
   * @{
   */
-  
+
 extern __IO uint32_t period_value;
 extern __IO uint32_t capture_number;
 uint16_t tmp_c4[2] = {0, 0};
@@ -149,7 +149,7 @@ void TMR14_GLOBAL_IRQHandler(void)
   {
     /* get the input capture value */
     tmp_c4[capture_number++] = tmr_channel_value_get(TMR14, TMR_SELECT_CHANNEL_1);
-   
+
     /* clear c1 interrupt pending bit */
     tmr_flag_clear(TMR14, TMR_C1_FLAG);
 

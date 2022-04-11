@@ -1,17 +1,17 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -80,16 +80,16 @@ int main(void)
   }
 
   flash_unlock();
-  
+
   /* erase one sector in boot memory */
   flash_sector_erase(TEST_FLASH_ADDRESS_START);
-  
+
   /* write data to boot memory */
   for(index = 0; index < TEST_BUFEER_SIZE; index++)
   {
     flash_halfword_program(TEST_FLASH_ADDRESS_START + index * sizeof(uint16_t), buffer_write[index]);
   }
-  
+
   /* read data from boot memory */
   for(index = 0; index < TEST_BUFEER_SIZE; index++)
   {
@@ -111,10 +111,10 @@ int main(void)
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */ 
+  */
 
 

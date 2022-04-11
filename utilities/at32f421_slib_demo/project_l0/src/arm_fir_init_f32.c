@@ -69,7 +69,7 @@ void arm_fir_init_f32(
 
   /* Clear state buffer. The size is always (blockSize + numTaps - 1) */
   memset(pState, 0, (numTaps + (blockSize - 1u)) * sizeof(float32_t));
- 
+
   /* Assign state pointer */
   S->pState = pState;
 }

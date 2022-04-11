@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     usart.h
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    usart header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -69,7 +69,7 @@ typedef struct
 /**
   * @}
   */
-  
+
 extern usart_group_type usart_group_struct;
 
 /** @defgroup bootloader_exported_functions
@@ -89,7 +89,7 @@ void uart_init(uint32_t baudrate);
 /**
   * @}
   */
-  
+
 #ifdef __cplusplus
 }
 #endif

@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_scfg.h
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    at32f421 system config header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -50,7 +50,7 @@ extern "C" {
 /** @defgroup SCFG_exported_types
   * @{
   */
-  
+
 
 /**
   * @brief scfg infrared modulation signal source selecting type
@@ -155,7 +155,7 @@ typedef enum
   SCFG_PINS_SOURCE12                     = 0x0C,
   SCFG_PINS_SOURCE13                     = 0x0D,
   SCFG_PINS_SOURCE14                     = 0x0E,
-  SCFG_PINS_SOURCE15                     = 0x0F 
+  SCFG_PINS_SOURCE15                     = 0x0F
 } scfg_pins_source_type;
 
 /**
@@ -186,12 +186,12 @@ typedef struct
       __IO uint32_t reserved1            : 2; /* [3:2] */
       __IO uint32_t pa11_12_rmp          : 1; /* [4] */
       __IO uint32_t ir_pol               : 1; /* [5] */
-      __IO uint32_t ir_src_sel           : 2; /* [7:6] */      
-      __IO uint32_t adc_dma_rmp          : 1; /* [8] */      
-      __IO uint32_t usart1_tx_dma_rmp    : 1; /* [9] */      
+      __IO uint32_t ir_src_sel           : 2; /* [7:6] */
+      __IO uint32_t adc_dma_rmp          : 1; /* [8] */
+      __IO uint32_t usart1_tx_dma_rmp    : 1; /* [9] */
       __IO uint32_t usart1_rx_dma_rmp    : 1; /* [10] */
       __IO uint32_t tmr16_dma_rmp        : 1; /* [11] */
-      __IO uint32_t tmr17_dma_rmp        : 1; /* [12] */      
+      __IO uint32_t tmr17_dma_rmp        : 1; /* [12] */
       __IO uint32_t reserved2            : 19;/* [31:13] */
     } cfg1_bit;
   };
@@ -304,5 +304,5 @@ void scfg_exint_line_config(scfg_port_source_type port_source, scfg_pins_source_
 #ifdef __cplusplus
 }
 #endif
-  
+
 #endif

@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.4
-  * @date     2022-02-11
+  * @version  v2.0.5
+  * @date     2022-04-02
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -270,7 +270,7 @@ int main(void)
 {
   uint32_t index = 0;
   system_clock_config();
-  nvic_priority_group_config(NVIC_PRIORITY_GROUP_4); 
+  nvic_priority_group_config(NVIC_PRIORITY_GROUP_4);
   at32_board_init();
   usart_configuration();
 
