@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -41,30 +41,30 @@
 #define I2Cx_SPEED                       100000
 #define I2Cx_ADDRESS                     0xA0
 
-#define I2Cx_PORT                        I2C1
-#define I2Cx_CLK                         CRM_I2C1_PERIPH_CLOCK
+#define I2Cx_PORT                        I2C2
+#define I2Cx_CLK                         CRM_I2C2_PERIPH_CLOCK
 
-#define I2Cx_SCL_PIN                     GPIO_PINS_6
-#define I2Cx_SCL_PIN_SOURCE              GPIO_PINS_SOURCE6
+#define I2Cx_SCL_PIN                     GPIO_PINS_10
+#define I2Cx_SCL_PIN_SOURCE              GPIO_PINS_SOURCE10
 #define I2Cx_SCL_PIN_MUX_NUM             GPIO_MUX_1
 #define I2Cx_SCL_GPIO_PORT               GPIOB
 #define I2Cx_SCL_GPIO_CLK                CRM_GPIOB_PERIPH_CLOCK
 
-#define I2Cx_SDA_PIN                     GPIO_PINS_7
-#define I2Cx_SDA_PIN_SOURCE              GPIO_PINS_SOURCE7
+#define I2Cx_SDA_PIN                     GPIO_PINS_11
+#define I2Cx_SDA_PIN_SOURCE              GPIO_PINS_SOURCE11
 #define I2Cx_SDA_PIN_MUX_NUM             GPIO_MUX_1
 #define I2Cx_SDA_GPIO_PORT               GPIOB
 #define I2Cx_SDA_GPIO_CLK                CRM_GPIOB_PERIPH_CLOCK
 
 #define I2Cx_DMA_CLK                     CRM_DMA1_PERIPH_CLOCK
-#define I2Cx_DMA_TX_CHANNEL              DMA1_CHANNEL2
-#define I2Cx_DMA_TX_IRQn                 DMA1_Channel3_2_IRQn
+#define I2Cx_DMA_TX_CHANNEL              DMA1_CHANNEL4
+#define I2Cx_DMA_TX_IRQn                 DMA1_Channel5_4_IRQn
 
-#define I2Cx_DMA_RX_CHANNEL              DMA1_CHANNEL3
-#define I2Cx_DMA_RX_IRQn                 DMA1_Channel3_2_IRQn
+#define I2Cx_DMA_RX_CHANNEL              DMA1_CHANNEL5
+#define I2Cx_DMA_RX_IRQn                 DMA1_Channel5_4_IRQn
 
-#define I2Cx_EVT_IRQn                    I2C1_EVT_IRQn
-#define I2Cx_ERR_IRQn                    I2C1_ERR_IRQn
+#define I2Cx_EVT_IRQn                    I2C2_EVT_IRQn
+#define I2Cx_ERR_IRQn                    I2C2_ERR_IRQn
 
 #define BUF_SIZE                         8
 

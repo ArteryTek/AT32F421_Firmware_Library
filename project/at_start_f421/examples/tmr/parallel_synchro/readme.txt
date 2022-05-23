@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -17,3 +17,5 @@
   the tmr15 is running:
   - at (tmr1 frequency)/ (tmr15 period + 1) = 75 khz and a duty cycle
   equal to tmr15_c1dt/(tmr15_pr + 1) = 60%
+
+  for more detailed information. please refer to the application note document AN0085.

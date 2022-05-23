@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_board.c
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    set of firmware functions to manage leds and push-button.
   *           initialize delay function.
   **************************************************************************
@@ -269,7 +269,7 @@ void at32_led_off(led_type led)
 }
 
 /**
-  * @brief  turns selected led tooggle.
+  * @brief  turns selected led toggle.
   * @param  led: specifies the led to be set off.
   *   this parameter can be one of following parameters:
   *     @arg LED2

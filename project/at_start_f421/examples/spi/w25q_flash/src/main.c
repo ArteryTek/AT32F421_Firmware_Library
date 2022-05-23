@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -96,7 +96,7 @@ int main(void)
   uart_print_init(115200);
   spiflash_init();
   flash_id_index = spiflash_read_id();
-  if(flash_id_index != W25Q128)
+  if((flash_id_index != W25Q128)&&(flash_id_index != W25Q80)&&(flash_id_index != W25Q16)&&(flash_id_index != W25Q32)&&(flash_id_index != W25Q64))
   {
     printf("flash id check error!\r\n");
     for(index = 0; index < 50; index++)

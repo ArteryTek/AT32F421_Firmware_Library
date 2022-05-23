@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -13,3 +13,5 @@
   - pa0    <--->    pb0
   - pa1    <--->    pa6
   - pa2    <--->    pa7 
+
+  for more detailed information. please refer to the application note document AN0085.

@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_ertc.c
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    contains all the functions for the ertc firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -1245,13 +1245,7 @@ flag_status ertc_flag_get(uint32_t flag)
   */
 void ertc_flag_clear(uint32_t flag)
 {
-  /* disable write protection */
-  ertc_write_protect_disable();
-
   ERTC->sts = ~(flag | 0x00000080) | (ERTC->sts_bit.imen << 7);
-
-  /* enable write protection */
-  ertc_write_protect_enable();
 }
 
 /**

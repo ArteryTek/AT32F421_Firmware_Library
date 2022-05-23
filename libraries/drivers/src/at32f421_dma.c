@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_dma.c
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    contains all the functions for the dma firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer

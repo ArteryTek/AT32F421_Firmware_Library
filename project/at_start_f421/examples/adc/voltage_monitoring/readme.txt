@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -14,3 +14,4 @@
   - adc1_ordinary_valuetab[1] ---> adc1_channel_5
   - adc1_ordinary_valuetab[2] ---> adc1_channel_6
   the voltage monitoring channel is: adc1_channel_5
+  for more detailed information. please refer to the application note document AN0114.

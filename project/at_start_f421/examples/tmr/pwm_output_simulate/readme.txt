@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -13,3 +13,5 @@
   c2dt overflow rate = tmr2 counter clock / c2dt_val = 219.7 hz
   c3dt overflow rate = tmr2 counter clock / c3dt_val = 439.4 hz
   c4dt overflow rate = tmr2 counter clock / c4dt_val = 878.9 hz 
+
+  for more detailed information. please refer to the application note document AN0085.

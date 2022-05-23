@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -11,3 +11,4 @@
   the internal_temperature_sensor.
   the convert data as follow:
   - adc1_ordinary_value ---> adc1_channel_16
+  for more detailed information. please refer to the application note document AN0114.

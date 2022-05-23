@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -15,4 +15,6 @@
   connect the following pins to an oscilloscope to monitor the different
   waveforms:
   - tmr1 ch3  --->  pa10
-  - tmr1 ch3c --->  pb15
+  - tmr1 ch3c --->  pb15
+
+  for more detailed information. please refer to the application note document AN0085.

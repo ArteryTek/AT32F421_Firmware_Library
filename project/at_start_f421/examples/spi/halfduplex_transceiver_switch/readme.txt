@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    readme
   **************************************************************************
   */
@@ -14,3 +14,5 @@
   - spi2 slaver        spi1 master
   - pb13     <--->     pa5
   - pb14     <--->     pa7
+
+  for more detailed information. please refer to the application note document AN0102.

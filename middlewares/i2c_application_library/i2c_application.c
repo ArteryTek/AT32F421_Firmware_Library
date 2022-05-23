@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     i2c_application.c
-  * @version  v2.0.5
-  * @date     2022-04-02
+  * @version  v2.0.6
+  * @date     2022-05-20
   * @brief    the driver library of the i2c peripheral
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -251,7 +251,7 @@ i2c_status_type i2c_master_write_addr(i2c_handle_type *hi2c, uint16_t address, u
   /* generate start condtion */
   i2c_start_generate(hi2c->i2cx);
 
-  /* wait for the start falg to be set */
+  /* wait for the start flag to be set */
   if(i2c_wait_flag(hi2c, I2C_STARTF_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     hi2c->error_code = I2C_ERR_START;
@@ -269,7 +269,7 @@ i2c_status_type i2c_master_write_addr(i2c_handle_type *hi2c, uint16_t address, u
     /* send slave 10-bit address header */
     i2c_data_send(hi2c->i2cx, (uint8_t)((address & 0x0300) >> 7) | 0xF0);
 
-    /* wait for the addrh falg to be set */
+    /* wait for the addrh flag to be set */
     if(i2c_wait_flag(hi2c, I2C_ADDRHF_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
     {
       hi2c->error_code = I2C_ERR_ADDR10;
@@ -281,7 +281,7 @@ i2c_status_type i2c_master_write_addr(i2c_handle_type *hi2c, uint16_t address, u
     i2c_data_send(hi2c->i2cx, (uint8_t)(address & 0x00FF));
   }
 
-  /* wait for the addr7 falg to be set */
+  /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     hi2c->error_code = I2C_ERR_ADDR;
@@ -307,7 +307,7 @@ i2c_status_type i2c_master_read_addr(i2c_handle_type *hi2c, uint16_t address, ui
   /* generate start condtion */
   i2c_start_generate(hi2c->i2cx);
 
-  /* wait for the start falg to be set */
+  /* wait for the start flag to be set */
   if(i2c_wait_flag(hi2c, I2C_STARTF_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     hi2c->error_code = I2C_ERR_START;
@@ -325,7 +325,7 @@ i2c_status_type i2c_master_read_addr(i2c_handle_type *hi2c, uint16_t address, ui
     /* send slave 10-bit address header */
     i2c_data_send(hi2c->i2cx, (uint8_t)((address & 0x0300) >> 7) | 0xF0);
 
-    /* wait for the addrh falg to be set */
+    /* wait for the addrh flag to be set */
     if(i2c_wait_flag(hi2c, I2C_ADDRHF_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
     {
       hi2c->error_code = I2C_ERR_ADDR10;
@@ -336,7 +336,7 @@ i2c_status_type i2c_master_read_addr(i2c_handle_type *hi2c, uint16_t address, ui
     /* send slave address */
     i2c_data_send(hi2c->i2cx, (uint8_t)(address & 0x00FF));
 
-    /* wait for the addr7 falg to be set */
+    /* wait for the addr7 flag to be set */
     if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
     {
       hi2c->error_code = I2C_ERR_ADDR;
@@ -350,7 +350,7 @@ i2c_status_type i2c_master_read_addr(i2c_handle_type *hi2c, uint16_t address, ui
     /* generate restart condtion */
     i2c_start_generate(hi2c->i2cx);
 
-    /* wait for the start falg to be set */
+    /* wait for the start flag to be set */
     if(i2c_wait_flag(hi2c, I2C_STARTF_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
     {
       hi2c->error_code = I2C_ERR_START;
@@ -362,7 +362,7 @@ i2c_status_type i2c_master_read_addr(i2c_handle_type *hi2c, uint16_t address, ui
     i2c_data_send(hi2c->i2cx, (uint8_t)((address & 0x0300) >> 7) | 0xF1);
   }
 
-  /* wait for the addr7 falg to be set */
+  /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     hi2c->error_code = I2C_ERR_ADDR;
@@ -390,7 +390,7 @@ i2c_status_type i2c_master_transmit(i2c_handle_type* hi2c, uint16_t address, uin
 
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -413,7 +413,7 @@ i2c_status_type i2c_master_transmit(i2c_handle_type* hi2c, uint16_t address, uin
 
   while(size > 0)
   {
-    /* wait for the tdbe falg to be set */
+    /* wait for the tdbe flag to be set */
     if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
     {
       /* generate stop condtion */
@@ -427,7 +427,7 @@ i2c_status_type i2c_master_transmit(i2c_handle_type* hi2c, uint16_t address, uin
     size--;
   }
 
-  /* wait for the tdc falg to be set */
+  /* wait for the tdc flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDC_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -458,7 +458,7 @@ i2c_status_type i2c_slave_receive(i2c_handle_type* hi2c, uint8_t* pdata, uint16_
 
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -470,7 +470,7 @@ i2c_status_type i2c_slave_receive(i2c_handle_type* hi2c, uint8_t* pdata, uint16_
   /* enable ack */
   i2c_ack_enable(hi2c->i2cx, TRUE);
 
-  /* wait for the addr7 falg to be set */
+  /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     /* disable ack */
@@ -484,7 +484,7 @@ i2c_status_type i2c_slave_receive(i2c_handle_type* hi2c, uint8_t* pdata, uint16_
 
   while(size > 0)
   {
-    /* wait for the rdbf falg to be set */
+    /* wait for the rdbf flag to be set */
     if(i2c_wait_flag(hi2c, I2C_RDBF_FLAG, RESET, I2C_EVENT_CHECK_STOP, timeout) != I2C_OK)
     {
       /* disable ack */
@@ -498,7 +498,7 @@ i2c_status_type i2c_slave_receive(i2c_handle_type* hi2c, uint8_t* pdata, uint16_
     size--;
   }
 
-  /* wait for the stop falg to be set */
+  /* wait for the stop flag to be set */
   if(i2c_wait_flag(hi2c, I2C_STOPF_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* disable ack */
@@ -533,7 +533,7 @@ i2c_status_type i2c_master_receive(i2c_handle_type* hi2c, uint16_t address, uint
 
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -592,7 +592,7 @@ i2c_status_type i2c_master_receive(i2c_handle_type* hi2c, uint16_t address, uint
       /* 1 byte */
       if(size == 1)
       {
-        /* wait for the rdbf falg to be set */
+        /* wait for the rdbf flag to be set */
         if(i2c_wait_flag(hi2c, I2C_RDBF_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
         {
           /* generate stop condtion */
@@ -608,7 +608,7 @@ i2c_status_type i2c_master_receive(i2c_handle_type* hi2c, uint16_t address, uint
       /* 2 bytes */
       else if(size == 2)
       {
-        /* wait for the tdc falg to be set */
+        /* wait for the tdc flag to be set */
         if(i2c_wait_flag(hi2c, I2C_TDC_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
         {
           /* generate stop condtion */
@@ -631,7 +631,7 @@ i2c_status_type i2c_master_receive(i2c_handle_type* hi2c, uint16_t address, uint
       /* 3 last bytes */
       else
       {
-        /* wait for the tdc falg to be set */
+        /* wait for the tdc flag to be set */
         if(i2c_wait_flag(hi2c, I2C_TDC_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
         {
           /* generate stop condtion */
@@ -647,7 +647,7 @@ i2c_status_type i2c_master_receive(i2c_handle_type* hi2c, uint16_t address, uint
         (*pdata++) = i2c_data_receive(hi2c->i2cx);
         size--;
 
-        /* wait for the tdc falg to be set */
+        /* wait for the tdc flag to be set */
         if(i2c_wait_flag(hi2c, I2C_TDC_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
         {
           /* generate stop condtion */
@@ -670,7 +670,7 @@ i2c_status_type i2c_master_receive(i2c_handle_type* hi2c, uint16_t address, uint
     }
     else
     {
-      /* wait for the rdbf falg to be set */
+      /* wait for the rdbf flag to be set */
       if(i2c_wait_flag(hi2c, I2C_RDBF_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
       {
         /* generate stop condtion */
@@ -704,7 +704,7 @@ i2c_status_type i2c_slave_transmit(i2c_handle_type* hi2c, uint8_t* pdata, uint16
 
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -716,7 +716,7 @@ i2c_status_type i2c_slave_transmit(i2c_handle_type* hi2c, uint8_t* pdata, uint16
   /* enable ack */
   i2c_ack_enable(hi2c->i2cx, TRUE);
 
-  /* wait for the addr7 falg to be set */
+  /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     /* disable ack */
@@ -730,7 +730,7 @@ i2c_status_type i2c_slave_transmit(i2c_handle_type* hi2c, uint8_t* pdata, uint16
 
   if(hi2c->i2cx->oaddr1_bit.addr1mode == I2C_ADDRESS_MODE_10BIT)
   {
-    /* wait for the addr7 falg to be set */
+    /* wait for the addr7 flag to be set */
     if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
     {
       /* disable ack */
@@ -745,7 +745,7 @@ i2c_status_type i2c_slave_transmit(i2c_handle_type* hi2c, uint8_t* pdata, uint16
 
   while(size > 0)
   {
-    /* wait for the tdbe falg to be set */
+    /* wait for the tdbe flag to be set */
     if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
     {
       /* disable ack */
@@ -759,7 +759,7 @@ i2c_status_type i2c_slave_transmit(i2c_handle_type* hi2c, uint8_t* pdata, uint16
     size--;
   }
 
-  /* wait for the ackfail falg to be set */
+  /* wait for the ackfail flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ACKFAIL_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_5;
@@ -795,7 +795,7 @@ i2c_status_type i2c_master_transmit_int(i2c_handle_type* hi2c, uint16_t address,
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -817,7 +817,7 @@ i2c_status_type i2c_master_transmit_int(i2c_handle_type* hi2c, uint16_t address,
   i2c_addr_flag_clear(hi2c);
 
   /* enable interrupt */
-  i2c_interrupt_enable(I2C1, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
+  i2c_interrupt_enable(hi2c->i2cx, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
 
   return I2C_OK;
 }
@@ -842,7 +842,7 @@ i2c_status_type i2c_slave_receive_int(i2c_handle_type* hi2c, uint8_t* pdata, uin
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -854,7 +854,7 @@ i2c_status_type i2c_slave_receive_int(i2c_handle_type* hi2c, uint8_t* pdata, uin
   /* enable ack */
   i2c_ack_enable(hi2c->i2cx, TRUE);
 
-  /* wait for the addr7 falg to be set */
+  /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_2;
@@ -864,7 +864,7 @@ i2c_status_type i2c_slave_receive_int(i2c_handle_type* hi2c, uint8_t* pdata, uin
   i2c_addr_flag_clear(hi2c);
 
   /* enable interrupt */
-  i2c_interrupt_enable(I2C1, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
+  i2c_interrupt_enable(hi2c->i2cx, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
 
   return I2C_OK;
 }
@@ -890,7 +890,7 @@ i2c_status_type i2c_master_receive_int(i2c_handle_type* hi2c, uint16_t address, 
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -943,7 +943,7 @@ i2c_status_type i2c_master_receive_int(i2c_handle_type* hi2c, uint16_t address, 
   }
 
   /* enable interrupt */
-  i2c_interrupt_enable(I2C1, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
+  i2c_interrupt_enable(hi2c->i2cx, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
 
   return I2C_OK;
 }
@@ -968,7 +968,7 @@ i2c_status_type i2c_slave_transmit_int(i2c_handle_type* hi2c, uint8_t* pdata, ui
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -980,7 +980,7 @@ i2c_status_type i2c_slave_transmit_int(i2c_handle_type* hi2c, uint8_t* pdata, ui
   /* enable ack */
   i2c_ack_enable(hi2c->i2cx, TRUE);
 
-  /* wait for the addr7 falg to be set */
+  /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_2;
@@ -991,7 +991,7 @@ i2c_status_type i2c_slave_transmit_int(i2c_handle_type* hi2c, uint8_t* pdata, ui
 
   if(hi2c->i2cx->oaddr1_bit.addr1mode == I2C_ADDRESS_MODE_10BIT)
   {
-    /* wait for the addr7 falg to be set */
+    /* wait for the addr7 flag to be set */
     if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
     {
       /* disable ack */
@@ -1005,7 +1005,7 @@ i2c_status_type i2c_slave_transmit_int(i2c_handle_type* hi2c, uint8_t* pdata, ui
   }
 
   /* enable interrupt */
-  i2c_interrupt_enable(I2C1, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
+  i2c_interrupt_enable(hi2c->i2cx, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
 
   return I2C_OK;
 }
@@ -1031,7 +1031,7 @@ i2c_status_type i2c_master_transmit_dma(i2c_handle_type* hi2c, uint16_t address,
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1084,7 +1084,7 @@ i2c_status_type i2c_slave_receive_dma(i2c_handle_type* hi2c, uint8_t* pdata, uin
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1102,7 +1102,7 @@ i2c_status_type i2c_slave_receive_dma(i2c_handle_type* hi2c, uint8_t* pdata, uin
   /* configure the dma channel */
   i2c_dma_config(hi2c, hi2c->dma_rx_channel, pdata, size);
 
-  /* wait for the addr7 falg to be set */
+  /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     /* disable ack */
@@ -1141,7 +1141,7 @@ i2c_status_type i2c_master_receive_dma(i2c_handle_type* hi2c, uint16_t address, 
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1217,7 +1217,7 @@ i2c_status_type i2c_slave_transmit_dma(i2c_handle_type* hi2c, uint8_t* pdata, ui
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1236,7 +1236,7 @@ i2c_status_type i2c_slave_transmit_dma(i2c_handle_type* hi2c, uint8_t* pdata, ui
   i2c_dma_config(hi2c, hi2c->dma_tx_channel, pdata, size);
 
 
-  /* wait for the addr7 falg to be set */
+  /* wait for the addr7 flag to be set */
   if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     /* disable ack */
@@ -1250,7 +1250,7 @@ i2c_status_type i2c_slave_transmit_dma(i2c_handle_type* hi2c, uint8_t* pdata, ui
     /* clear addr flag */
     i2c_addr_flag_clear(hi2c);
 
-    /* wait for the addr7 falg to be set */
+    /* wait for the addr7 flag to be set */
     if(i2c_wait_flag(hi2c, I2C_ADDR7F_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
     {
       /* disable ack */
@@ -1287,7 +1287,7 @@ i2c_status_type i2c_memory_write(i2c_handle_type* hi2c, uint16_t address, uint16
 
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1308,7 +1308,7 @@ i2c_status_type i2c_memory_write(i2c_handle_type* hi2c, uint16_t address, uint16
   /* clear addr flag */
   i2c_addr_flag_clear(hi2c);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1322,7 +1322,7 @@ i2c_status_type i2c_memory_write(i2c_handle_type* hi2c, uint16_t address, uint16
 
   while(size > 0)
   {
-    /* wait for the tdbe falg to be set */
+    /* wait for the tdbe flag to be set */
     if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
     {
       /* generate stop condtion */
@@ -1336,7 +1336,7 @@ i2c_status_type i2c_memory_write(i2c_handle_type* hi2c, uint16_t address, uint16
     size--;
   }
 
-  /* wait for the tdc falg to be set */
+  /* wait for the tdc flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDC_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1369,7 +1369,7 @@ i2c_status_type i2c_memory_read(i2c_handle_type* hi2c, uint16_t address, uint16_
 
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1393,7 +1393,7 @@ i2c_status_type i2c_memory_read(i2c_handle_type* hi2c, uint16_t address, uint16_
   /* clear addr flag */
   i2c_addr_flag_clear(hi2c);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1405,7 +1405,7 @@ i2c_status_type i2c_memory_read(i2c_handle_type* hi2c, uint16_t address, uint16_
   /* send memory address */
   i2c_data_send(hi2c->i2cx, mem_address);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1461,7 +1461,7 @@ i2c_status_type i2c_memory_read(i2c_handle_type* hi2c, uint16_t address, uint16_
       /* 1 byte */
       if(size == 1)
       {
-        /* wait for the rdbf falg to be set */
+        /* wait for the rdbf flag to be set */
         if(i2c_wait_flag(hi2c, I2C_RDBF_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
         {
           /* generate stop condtion */
@@ -1477,7 +1477,7 @@ i2c_status_type i2c_memory_read(i2c_handle_type* hi2c, uint16_t address, uint16_
       /* 2 bytes */
       else if(size == 2)
       {
-        /* wait for the tdc falg to be set */
+        /* wait for the tdc flag to be set */
         if(i2c_wait_flag(hi2c, I2C_TDC_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
         {
           /* generate stop condtion */
@@ -1500,7 +1500,7 @@ i2c_status_type i2c_memory_read(i2c_handle_type* hi2c, uint16_t address, uint16_
       /* 3 last bytes */
       else
       {
-        /* wait for the tdc falg to be set */
+        /* wait for the tdc flag to be set */
         if(i2c_wait_flag(hi2c, I2C_TDC_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
         {
           /* generate stop condtion */
@@ -1516,7 +1516,7 @@ i2c_status_type i2c_memory_read(i2c_handle_type* hi2c, uint16_t address, uint16_
         (*pdata++) = i2c_data_receive(hi2c->i2cx);
         size--;
 
-        /* wait for the tdc falg to be set */
+        /* wait for the tdc flag to be set */
         if(i2c_wait_flag(hi2c, I2C_TDC_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
         {
           /* generate stop condtion */
@@ -1539,7 +1539,7 @@ i2c_status_type i2c_memory_read(i2c_handle_type* hi2c, uint16_t address, uint16_
     }
     else
     {
-      /* wait for the rdbf falg to be set */
+      /* wait for the rdbf flag to be set */
       if(i2c_wait_flag(hi2c, I2C_RDBF_FLAG, RESET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
       {
         /* generate stop condtion */
@@ -1579,7 +1579,7 @@ i2c_status_type i2c_memory_write_int(i2c_handle_type* hi2c, uint16_t address, ui
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1600,7 +1600,7 @@ i2c_status_type i2c_memory_write_int(i2c_handle_type* hi2c, uint16_t address, ui
   /* clear addr flag */
   i2c_addr_flag_clear(hi2c);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1612,7 +1612,7 @@ i2c_status_type i2c_memory_write_int(i2c_handle_type* hi2c, uint16_t address, ui
   /* send memory address */
   i2c_data_send(hi2c->i2cx, mem_address);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1622,7 +1622,7 @@ i2c_status_type i2c_memory_write_int(i2c_handle_type* hi2c, uint16_t address, ui
   }
 
   /* enable interrupt */
-  i2c_interrupt_enable(I2C1, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
+  i2c_interrupt_enable(hi2c->i2cx, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
 
   return I2C_OK;
 }
@@ -1649,7 +1649,7 @@ i2c_status_type i2c_memory_read_int(i2c_handle_type* hi2c, uint16_t address, uin
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1670,7 +1670,7 @@ i2c_status_type i2c_memory_read_int(i2c_handle_type* hi2c, uint16_t address, uin
   /* clear addr flag */
   i2c_addr_flag_clear(hi2c);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1682,7 +1682,7 @@ i2c_status_type i2c_memory_read_int(i2c_handle_type* hi2c, uint16_t address, uin
   /* send memory address */
   i2c_data_send(hi2c->i2cx, mem_address);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1732,7 +1732,7 @@ i2c_status_type i2c_memory_read_int(i2c_handle_type* hi2c, uint16_t address, uin
   }
 
   /* enable interrupt */
-  i2c_interrupt_enable(I2C1, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
+  i2c_interrupt_enable(hi2c->i2cx, I2C_EVT_INT | I2C_DATA_INT | I2C_ERR_INT, TRUE);
 
   return I2C_OK;
 }
@@ -1759,7 +1759,7 @@ i2c_status_type i2c_memory_write_dma(i2c_handle_type* hi2c, uint16_t address, ui
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1786,7 +1786,7 @@ i2c_status_type i2c_memory_write_dma(i2c_handle_type* hi2c, uint16_t address, ui
   /* clear addr flag */
   i2c_addr_flag_clear(hi2c);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1798,7 +1798,7 @@ i2c_status_type i2c_memory_write_dma(i2c_handle_type* hi2c, uint16_t address, ui
   /* send memory address */
   i2c_data_send(hi2c->i2cx, mem_address);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1835,7 +1835,7 @@ i2c_status_type i2c_memory_read_dma(i2c_handle_type* hi2c, uint16_t address, uin
   hi2c->timeout = timeout;
   hi2c->error_code = I2C_OK;
 
-  /* wait for the busy falg to be reset */
+  /* wait for the busy flag to be reset */
   if(i2c_wait_flag(hi2c, I2C_BUSYF_FLAG, SET, I2C_EVENT_CHECK_NONE, timeout) != I2C_OK)
   {
     return I2C_ERR_STEP_1;
@@ -1865,7 +1865,7 @@ i2c_status_type i2c_memory_read_dma(i2c_handle_type* hi2c, uint16_t address, uin
   /* clear addr flag */
   i2c_addr_flag_clear(hi2c);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -1877,7 +1877,7 @@ i2c_status_type i2c_memory_read_dma(i2c_handle_type* hi2c, uint16_t address, uin
   /* send memory address */
   i2c_data_send(hi2c->i2cx, mem_address);
 
-  /* wait for the tdbe falg to be set */
+  /* wait for the tdbe flag to be set */
   if(i2c_wait_flag(hi2c, I2C_TDBE_FLAG, RESET, I2C_EVENT_CHECK_ACKFAIL, timeout) != I2C_OK)
   {
     /* generate stop condtion */
@@ -2048,7 +2048,7 @@ void i2c_slave_tx_isr_int(i2c_handle_type* hi2c)
         /* disable interrupt */
         i2c_interrupt_enable(hi2c->i2cx, I2C_DATA_INT | I2C_EVT_INT | I2C_ERR_INT, FALSE);
 
-        /* wait for the ackfail falg to be set */
+        /* wait for the ackfail flag to be set */
         hi2c->status = i2c_wait_flag(hi2c, I2C_ACKFAIL_FLAG, RESET, I2C_EVENT_CHECK_NONE, hi2c->timeout);
 
         /* clear ackfail flag */
@@ -2139,14 +2139,14 @@ void i2c_dma_tx_irq_handler(i2c_handle_type* hi2c)
     switch(hi2c->mode)
     {
       case I2C_DMA_MA_TX:
-        /* wait for the tdc falg to be set */
+        /* wait for the tdc flag to be set */
         hi2c->status = i2c_wait_flag(hi2c, I2C_TDC_FLAG, RESET, I2C_EVENT_CHECK_NONE, hi2c->timeout);
 
         /* generate stop condtion */
         i2c_stop_generate(hi2c->i2cx);
         break;
       case I2C_DMA_SLA_TX:
-        /* wait for the ackfail falg to be set */
+        /* wait for the ackfail flag to be set */
         hi2c->status = i2c_wait_flag(hi2c, I2C_ACKFAIL_FLAG, RESET, I2C_EVENT_CHECK_NONE, hi2c->timeout);
 
         /* clear ackfail flag */
@@ -2198,7 +2198,7 @@ void i2c_dma_rx_irq_handler(i2c_handle_type* hi2c)
         }
         break;
       case I2C_DMA_SLA_RX:
-        /* wait for the stop falg to be set */
+        /* wait for the stop flag to be set */
         hi2c->status = i2c_wait_flag(hi2c, I2C_STOPF_FLAG, RESET, I2C_EVENT_CHECK_NONE, hi2c->timeout);
 
         /* clear stop flag */
