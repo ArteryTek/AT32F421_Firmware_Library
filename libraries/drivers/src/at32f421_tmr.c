@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_tmr.c
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    contains all the functions for the tmr firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -175,7 +175,7 @@ void tmr_base_init(tmr_type* tmr_x, uint32_t tmr_pr, uint32_t tmr_div)
   * @brief  set tmr clock source division
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1, TMR3, TMR6, TMR14, TMR15, TMR16, TMR17
+  *         TMR1, TMR3, TMR14, TMR15, TMR16, TMR17
   * @param  tmr_clock_div
   *         this parameter can be one of the following values:
   *         - TMR_CLOCK_DIV1
@@ -302,7 +302,7 @@ void tmr_output_channel_config(tmr_type *tmr_x, tmr_channel_select_type tmr_chan
   /* get channel complementary idle state bit position in ctrl2 register */
   channel_c_index = (uint16_t)(tmr_output_struct->occ_idle_state << (9 + tmr_channel));
 
-  if(tmr_x == TMR1)
+  if(tmr_x == TMR1 || tmr_x == TMR15 || tmr_x == TMR16 || tmr_x == TMR17)
   {
     /* set output channel complementary idle state */
     tmr_x->ctrl2 &= ~channel_c_index;
@@ -344,7 +344,7 @@ void tmr_output_channel_config(tmr_type *tmr_x, tmr_channel_select_type tmr_chan
   /* get channel complementary polarity bit position in cctrl register */
   channel_c_index = (uint16_t)(tmr_output_struct->occ_polarity << ((tmr_channel * 2) + 3));
 
-  if(tmr_x == TMR1)
+  if(tmr_x == TMR1 || tmr_x == TMR15 || tmr_x == TMR16 || tmr_x == TMR17)
   {
     /* set output channel complementary polarity */
     tmr_x->cctrl &= ~channel_c_index;
@@ -361,7 +361,7 @@ void tmr_output_channel_config(tmr_type *tmr_x, tmr_channel_select_type tmr_chan
   /* get channel complementary enable bit position in cctrl register */
   channel_c_index = (uint16_t)(tmr_output_struct->occ_output_state << ((tmr_channel * 2) + 2));
 
-  if(tmr_x == TMR1)
+  if(tmr_x == TMR1 || tmr_x == TMR15 || tmr_x == TMR16 || tmr_x == TMR17)
   {
     /* set output channel complementary enable bit */
     tmr_x->cctrl &= ~channel_c_index;
@@ -1013,16 +1013,16 @@ void tmr_pwm_input_config(tmr_type *tmr_x, tmr_input_config_type *input_struct, 
   * @brief  select tmr channel1 input
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1, TMR3, TMR15
-  * @param  ti1_connect
+  *         TMR1, TMR3
+  * @param  ch1_connect
   *         this parameter can be one of the following values:
   *         - TMR_CHANEL1_CONNECTED_C1IRAW
   *         - TMR_CHANEL1_2_3_CONNECTED_C1IRAW_XOR
   * @retval none
   */
-void tmr_channel1_input_select(tmr_type *tmr_x, tmr_channel1_input_connected_type ti1_connect)
+void tmr_channel1_input_select(tmr_type *tmr_x, tmr_channel1_input_connected_type ch1_connect)
 {
-  tmr_x->ctrl2_bit.c1insel = ti1_connect;
+  tmr_x->ctrl2_bit.c1insel = ch1_connect;
 }
 
 /**
@@ -1078,7 +1078,7 @@ void tmr_input_channel_divider_set(tmr_type *tmr_x, tmr_channel_select_type tmr_
   * @brief  select tmr primary mode
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1, TMR3
+  *         TMR1, TMR3, TMR6
   * @param  primary_mode
   *         this parameter can be one of the following values:
   *         - TMR_PRIMARY_SEL_RESET
@@ -1122,7 +1122,7 @@ void tmr_sub_mode_select(tmr_type *tmr_x, tmr_sub_mode_select_type sub_mode)
   * @brief  select tmr channel dma
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1, TMR3, TMR15
+  *         TMR1, TMR3, TMR15, TMR16, TMR17
   * @param  cc_dma_select
   *         this parameter can be one of the following values:
   *         - TMR_DMA_REQUEST_BY_CHANNEL
@@ -1151,7 +1151,7 @@ void tmr_hall_select(tmr_type *tmr_x,  confirm_state new_state)
   * @brief  enbale tmr channel buffer
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1
+  *         TMR1, TMR15, TMR16, TMR17
   * @param  new_state (TRUE or FALSE)
   * @retval none
   */
@@ -1199,7 +1199,7 @@ void tmr_sub_sync_mode_set(tmr_type *tmr_x, confirm_state new_state)
   * @brief  enable or disable tmr dma request
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1, TMR3, TMR14, TMR15, TMR16, TMR17
+  *         TMR1, TMR3, TMR6, TMR14, TMR15, TMR16, TMR17
   * @param  dma_request
   *         this parameter can be one of the following values:
   *         - TMR_OVERFLOW_DMA_REQUEST
@@ -1342,7 +1342,7 @@ void tmr_event_sw_trigger(tmr_type *tmr_x, tmr_event_trigger_type tmr_event)
   * @brief  tmr output enable(oen),this function is important for advtm output enable
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1
+  *         TMR1, TMR15, TMR16, TMR17
   * @param  new_state (TRUE or FALSE)
   * @retval none
   */
@@ -1429,7 +1429,7 @@ void tmr_output_channel_polarity_set(tmr_type *tmr_x, tmr_channel_select_type tm
   * @brief  config tmr external clock
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1, TMR3, TMR14, TMR15, TMR16, TMR17
+  *         TMR1, TMR3
   * @param  es_divide
   *         this parameter can be one of the following values:
   *         - TMR_ES_FREQUENCY_DIV_1
@@ -1455,7 +1455,7 @@ void tmr_external_clock_config(tmr_type *tmr_x, tmr_external_signal_divider_type
   * @brief  config tmr external clock mode1
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1, TMR3, TMR14, TMR15, TMR16, TMR17
+  *         TMR1, TMR3
   * @param  es_divide
   *         this parameter can be one of the following values:
   *         - TMR_ES_FREQUENCY_DIV_1
@@ -1481,7 +1481,7 @@ void tmr_external_clock_mode1_config(tmr_type *tmr_x, tmr_external_signal_divide
   * @brief  config tmr external clock mode2
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1, TMR3, TMR15
+  *         TMR1, TMR3
   * @param  es_divide
   *         this parameter can be one of the following values:
   *         - TMR_ES_FREQUENCY_DIV_1
@@ -1593,7 +1593,7 @@ void tmr_force_output_set(tmr_type *tmr_x,  tmr_channel_select_type tmr_channel,
   * @brief  config tmr dma control
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1, TMR3, TMR15
+  *         TMR1, TMR3, TMR15, TMR16, TMR17
   * @param  dma_length
   *         this parameter can be one of the following values:
   *         - TMR_DMA_TRANSFER_1BYTE
@@ -1636,7 +1636,7 @@ void tmr_dma_control_config(tmr_type *tmr_x, tmr_dma_transfer_length_type dma_le
   * @brief  config tmr break mode and dead-time
   * @param  tmr_x: select the tmr peripheral.
   *         this parameter can be one of the following values:
-  *         TMR1
+  *         TMR1, TMR15, TMR16, TMR17
   * @param  brkdt_struct
   *         - to the structure of tmr_brkdt_config_type
   * @retval none
@@ -1659,7 +1659,7 @@ void tmr_brkdt_config(tmr_type *tmr_x, tmr_brkdt_config_type *brkdt_struct)
   *         TMR14
   * @param  input_remap
   *         - TMR14_GPIO
-  *         - TMR14_LICK
+  *         - TMR14_ERTCCLK
   *         - TMR14_HEXT_DIV32
   *         - TMR14_CLKOUT
   * @retval none

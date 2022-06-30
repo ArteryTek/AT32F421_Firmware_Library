@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_int.h
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    header file of main interrupt service routines.
   **************************************************************************
   *                       Copyright notice & Disclaimer

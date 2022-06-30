@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_gpio.c
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    contains all the functions for the gpio firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -337,7 +337,7 @@ void gpio_bits_write(gpio_type *gpio_x, uint16_t pins, confirm_state bit_state)
   * @param  port_value: specifies the value to be written to the port output data register.
   * @retval none
   */
-void gpio_port_wirte(gpio_type *gpio_x, uint16_t port_value)
+void gpio_port_write(gpio_type *gpio_x, uint16_t port_value)
 {
   gpio_x->odt = port_value;
 }

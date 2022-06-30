@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_ertc.c
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    contains all the functions for the ertc firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -400,7 +400,7 @@ void ertc_calendar_get(ertc_time_type* time)
   ertc_reg_time_type reg_tm;
   ertc_reg_date_type reg_dt;
 
-  (void) (ERTC->sts);
+  UNUSED(ERTC->sts);
 
   reg_tm.time = ERTC->time;
   reg_dt.date = ERTC->date;

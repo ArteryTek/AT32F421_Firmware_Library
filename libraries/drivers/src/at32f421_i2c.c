@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_i2c.c
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    contains all the functions for the i2c firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -600,7 +600,7 @@ flag_status i2c_flag_get(i2c_type *i2c_x, uint32_t flag)
   * @brief  clear flag status
   * @param  i2c_x: to select the i2c peripheral.
   *         this parameter can be one of the following values:
-  *         I2C1, I2C2.
+  *         I2C1, I2C2, I2C3.
   * @param  flag
   *         this parameter can be any combination of the following values:
   *         - I2C_BUSERR_FLAG: bus error flag.
@@ -610,11 +610,23 @@ flag_status i2c_flag_get(i2c_type *i2c_x, uint32_t flag)
   *         - I2C_PECERR_FLAG: pec receive error flag.
   *         - I2C_TMOUT_FLAG: smbus timeout flag.
   *         - I2C_ALERTF_FLAG: smbus alert flag.
+  *         - I2C_STOPF_FLAG: stop condition generation complete flag.
+  *         - I2C_ADDR7F_FLAG: i2c 0~7 bit address match flag.
   * @retval none
   */
 void i2c_flag_clear(i2c_type *i2c_x, uint32_t flag)
-{
-  i2c_x->sts1 = (uint16_t)~(flag & (uint32_t)0x00FFFFFF);
+{  
+  i2c_x->sts1 = (uint16_t)~(flag & (uint32_t)0x0000DF00);
+  
+  if(i2c_x->sts1 & I2C_ADDR7F_FLAG)
+  {
+    UNUSED(i2c_x->sts2);
+  }
+  
+  if(i2c_x->sts1 & I2C_STOPF_FLAG)
+  {
+    i2c_x->ctrl1_bit.i2cen = TRUE;
+  }
 }
 
 /**

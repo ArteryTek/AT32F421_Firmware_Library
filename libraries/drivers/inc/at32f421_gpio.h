@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_gpio.h
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    at32f421 gpio header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -621,7 +621,7 @@ uint16_t gpio_output_data_read(gpio_type *gpio_x);
 void gpio_bits_set(gpio_type *gpio_x, uint16_t pins);
 void gpio_bits_reset(gpio_type *gpio_x, uint16_t pins);
 void gpio_bits_write(gpio_type *gpio_x, uint16_t pins, confirm_state bit_state);
-void gpio_port_wirte(gpio_type *gpio_x, uint16_t port_value);
+void gpio_port_write(gpio_type *gpio_x, uint16_t port_value);
 void gpio_pin_wp_config(gpio_type *gpio_x, uint16_t pins);
 void gpio_pins_huge_driven_config(gpio_type *gpio_x, uint16_t pins, confirm_state new_state);
 void gpio_pin_mux_config(gpio_type *gpio_x, gpio_pins_source_type gpio_pin_source, gpio_mux_sel_type gpio_mux);

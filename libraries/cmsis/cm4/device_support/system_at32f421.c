@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     system_at32f421.c
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    contains all the functions for cmsis cortex-m4 system source file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -91,6 +91,23 @@ void SystemInit (void)
 
   /* disable all interrupts enable and clear pending bits  */
   CRM->clkint = 0x009F0000;
+
+#if defined (AT32F421K8T7) || defined (AT32F421G8U7) || defined (AT32F421K6T7)   || \
+    defined (AT32F421G6U7) || defined (AT32F421K4T7) || defined (AT32F421G4U7)
+  REG32(0x40021014) |= 0x00060000;
+  REG32(0x48000400) &= 0xFFFCFFCF;
+  REG32(0x48000400) |= 0x00010010;
+  REG32(0x48000404) &= 0xFFFFFEFB;
+  REG32(0x48000414) &= 0xFFFFFEFB;
+  REG32(0x48000414) |= 0x00000004;
+#if defined (AT32F421G8U7) || defined (AT32F421G6U7) || defined (AT32F421G4U7)
+  REG32(0x48000000) &= 0xFC3FFFFF;
+  REG32(0x48000000) |= 0x01400000;
+  REG32(0x48000004) &= 0xFFFFE7FF;
+  REG32(0x48000014) &= 0xFFFFE7FF;
+#endif
+  REG32(0x40021014) &= 0xFFF9FFFF;
+#endif
 
 #ifdef VECT_TAB_SRAM
   SCB->VTOR = SRAM_BASE  | VECT_TAB_OFFSET;  /* vector table relocation in internal sram. */

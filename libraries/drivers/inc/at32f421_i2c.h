@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_i2c.h
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    at32f421 i2c header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -346,7 +346,6 @@ typedef struct
 
 #define I2C1                             ((i2c_type *) I2C1_BASE)
 #define I2C2                             ((i2c_type *) I2C2_BASE)
-#define I2C3                             ((i2c_type *) I2C3_BASE)
 
 /** @defgroup I2C_exported_functions
   * @{

@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -161,7 +161,7 @@ uint32_t lick_frequency_get(void)
   crm_periph_clock_enable(CRM_TMR14_PERIPH_CLOCK, TRUE);
 
   /* connect internally the tmr14_ch1 to the lick clock output */
-  tmr_iremap_config(TMR14, TMR14_LICK);
+  tmr_iremap_config(TMR14, TMR14_ERTCCLK);
 
   /* configure tmr14 divider */
   tmr_div_value_set(TMR14, 0);

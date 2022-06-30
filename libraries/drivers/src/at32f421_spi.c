@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_spi.c
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    contains all the functions for the spi firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -579,23 +579,21 @@ flag_status spi_i2s_flag_get(spi_type* spi_x, uint32_t spi_i2s_flag)
   */
 void spi_i2s_flag_clear(spi_type* spi_x, uint32_t spi_i2s_flag)
 {
-  volatile uint32_t temp = 0;
-  temp = temp;
   if(spi_i2s_flag == SPI_CCERR_FLAG)
     spi_x->sts = ~SPI_CCERR_FLAG;
   else if(spi_i2s_flag == SPI_I2S_RDBF_FLAG)
-    temp = REG32(&spi_x->dt);
+    UNUSED(spi_x->dt);
   else if(spi_i2s_flag == I2S_TUERR_FLAG)
-    temp = REG32(&spi_x->sts);
+    UNUSED(spi_x->sts);
   else if(spi_i2s_flag == SPI_MMERR_FLAG)
   {
-    temp = REG32(&spi_x->sts);
+    UNUSED(spi_x->sts);
     spi_x->ctrl1 = spi_x->ctrl1;
   }
   else if(spi_i2s_flag == SPI_I2S_ROERR_FLAG)
   {
-    temp = REG32(&spi_x->dt);
-    temp = REG32(&spi_x->sts);
+    UNUSED(spi_x->dt);
+    UNUSED(spi_x->sts);
   }
 }
 

@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_int.c
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    main interrupt service routines.
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -169,7 +169,7 @@ void SysTick_Handler(void)
       spi_enable(SPI1, TRUE);
       if(rx_index == BUFFERSIZE)
       {
-        spi_i2s_interrupt_enable(SPI1, SPI_I2S_RDBF_FLAG, FALSE);
+        spi_i2s_interrupt_enable(SPI1, SPI_I2S_RDBF_INT, FALSE);
       }
     }
   }

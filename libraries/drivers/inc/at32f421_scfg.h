@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_scfg.h
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    at32f421 system config header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -280,12 +280,12 @@ typedef struct
 void scfg_reset(void);
 void scfg_infrared_config(scfg_ir_source_type source, scfg_ir_polarity_type polarity);
 uint8_t scfg_mem_map_get(void);
-void scfg_pa11pa12_pin_remap (scfg_pa11pa12_remap_type pin_remap);
-void scfg_adc_dma_channel_remap (scfg_adc_dma_remap_type dma_channel);
-void scfg_usart1_tx_dma_channel_remap (scfg_usart1_tx_dma_remap_type dma_channel);
-void scfg_usart1_rx_dma_channel_remap (scfg_usart1_rx_dma_remap_type dma_channel);
-void scfg_tmr16_dma_channel_remap (scfg_tmr16_dma_remap_type dma_channel);
-void scfg_tmr17_dma_channel_remap (scfg_tmr17_dma_remap_type dma_channel);
+void scfg_pa11pa12_pin_remap(scfg_pa11pa12_remap_type pin_remap);
+void scfg_adc_dma_channel_remap(scfg_adc_dma_remap_type dma_channel);
+void scfg_usart1_tx_dma_channel_remap(scfg_usart1_tx_dma_remap_type dma_channel);
+void scfg_usart1_rx_dma_channel_remap(scfg_usart1_rx_dma_remap_type dma_channel);
+void scfg_tmr16_dma_channel_remap(scfg_tmr16_dma_remap_type dma_channel);
+void scfg_tmr17_dma_channel_remap(scfg_tmr17_dma_remap_type dma_channel);
 void scfg_exint_line_config(scfg_port_source_type port_source, scfg_pins_source_type pin_source);
 
 

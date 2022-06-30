@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_scfg.c
-  * @version  v2.0.6
-  * @date     2022-05-20
+  * @version  v2.0.7
+  * @date     2022-06-28
   * @brief    contains all the functions for the system config firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -92,7 +92,7 @@ uint8_t scfg_mem_map_get(void)
   *         - SCFG_PA11PA12_TO_PA9PA10
   * @retval none
   */
-void scfg_pa11pa12_pin_remap (scfg_pa11pa12_remap_type pin_remap)
+void scfg_pa11pa12_pin_remap(scfg_pa11pa12_remap_type pin_remap)
 {
   SCFG->cfg1_bit.pa11_12_rmp = pin_remap;
 }
@@ -105,7 +105,7 @@ void scfg_pa11pa12_pin_remap (scfg_pa11pa12_remap_type pin_remap)
   *         - SCFG_ADC_TO_DMA_CHANNEL_2
   * @retval none
   */
-void scfg_adc_dma_channel_remap (scfg_adc_dma_remap_type dma_channel)
+void scfg_adc_dma_channel_remap(scfg_adc_dma_remap_type dma_channel)
 {
   SCFG->cfg1_bit.adc_dma_rmp = dma_channel;
 }
@@ -118,7 +118,7 @@ void scfg_adc_dma_channel_remap (scfg_adc_dma_remap_type dma_channel)
   *         - SCFG_USART1_TX_TO_DMA_CHANNEL_4
   * @retval none
   */
-void scfg_usart1_tx_dma_channel_remap (scfg_usart1_tx_dma_remap_type dma_channel)
+void scfg_usart1_tx_dma_channel_remap(scfg_usart1_tx_dma_remap_type dma_channel)
 {
   SCFG->cfg1_bit.usart1_tx_dma_rmp = dma_channel;
 }
@@ -131,7 +131,7 @@ void scfg_usart1_tx_dma_channel_remap (scfg_usart1_tx_dma_remap_type dma_channel
   *         - SCFG_USART1_RX_TO_DMA_CHANNEL_5
   * @retval none
   */
-void scfg_usart1_rx_dma_channel_remap (scfg_usart1_rx_dma_remap_type dma_channel)
+void scfg_usart1_rx_dma_channel_remap(scfg_usart1_rx_dma_remap_type dma_channel)
 {
   SCFG->cfg1_bit.usart1_rx_dma_rmp = dma_channel;
 }
@@ -144,7 +144,7 @@ void scfg_usart1_rx_dma_channel_remap (scfg_usart1_rx_dma_remap_type dma_channel
   *         - SCFG_TMR16_TO_DMA_CHANNEL_4
   * @retval none
   */
-void scfg_tmr16_dma_channel_remap (scfg_tmr16_dma_remap_type dma_channel)
+void scfg_tmr16_dma_channel_remap(scfg_tmr16_dma_remap_type dma_channel)
 {
   SCFG->cfg1_bit.tmr16_dma_rmp = dma_channel;
 }
@@ -157,7 +157,7 @@ void scfg_tmr16_dma_channel_remap (scfg_tmr16_dma_remap_type dma_channel)
   *         - SCFG_TMR17_TO_DMA_CHANNEL_2
   * @retval none
   */
-void scfg_tmr17_dma_channel_remap (scfg_tmr17_dma_remap_type dma_channel)
+void scfg_tmr17_dma_channel_remap(scfg_tmr17_dma_remap_type dma_channel)
 {
   SCFG->cfg1_bit.tmr17_dma_rmp = dma_channel;
 }
