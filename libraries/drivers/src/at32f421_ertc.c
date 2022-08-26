@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_ertc.c
-  * @version  v2.0.7
-  * @date     2022-06-28
+  * @version  v2.0.8
+  * @date     2022-08-16
   * @brief    contains all the functions for the ertc firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer

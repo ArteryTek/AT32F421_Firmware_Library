@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     system_at32f421.h
-  * @version  v2.0.7
-  * @date     2022-06-28
+  * @version  v2.0.8
+  * @date     2022-08-16
   * @brief    cmsis cortex-m4 system header file.
   **************************************************************************
   *                       Copyright notice & Disclaimer

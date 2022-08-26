@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     main.c
-  * @version  v2.0.7
-  * @date     2022-06-28
+  * @version  v2.0.8
+  * @date     2022-08-16
   * @brief    main program
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -78,7 +78,7 @@ uint8_t rx_buf3[BUF_SIZE] = {0};
 i2c_handle_type hi2cx;
 
 void error_handler(uint32_t error_code);
-uint32_t buffer_cpmpare(uint8_t* buffer1, uint8_t* buffer2, uint32_t len);
+uint32_t buffer_compare(uint8_t* buffer1, uint8_t* buffer2, uint32_t len);
 void i2c_lowlevel_init(i2c_handle_type* hi2c);
 
 /**
@@ -102,7 +102,7 @@ void error_handler(uint32_t error_code)
   * @retval 0: equal.
   *         1: unequal.
   */
-uint32_t buffer_cpmpare(uint8_t* buffer1, uint8_t* buffer2, uint32_t len)
+uint32_t buffer_compare(uint8_t* buffer1, uint8_t* buffer2, uint32_t len)
 {
   uint32_t i;
 
@@ -173,7 +173,7 @@ void i2c_lowlevel_init(i2c_handle_type* hi2c)
     hi2c->dma_init_struct.memory_inc_enable        = TRUE;
     hi2c->dma_init_struct.peripheral_data_width    = DMA_PERIPHERAL_DATA_WIDTH_BYTE;
     hi2c->dma_init_struct.memory_data_width        = DMA_MEMORY_DATA_WIDTH_BYTE;
-    hi2c->dma_init_struct.loop_mode_enable     = FALSE;
+    hi2c->dma_init_struct.loop_mode_enable         = FALSE;
     hi2c->dma_init_struct.priority                 = DMA_PRIORITY_LOW;
     hi2c->dma_init_struct.direction                = DMA_DIR_MEMORY_TO_PERIPHERAL;
 
@@ -214,7 +214,7 @@ int main(void)
     }
 
     /* write data to memory device */
-    if((i2c_status = i2c_memory_write(&hi2cx, I2Cx_ADDRESS, 0, tx_buf1, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
+    if((i2c_status = i2c_memory_write(&hi2cx, I2C_MEM_ADDR_WIDIH_8, I2Cx_ADDRESS, 0x00, tx_buf1, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
     {
       error_handler(i2c_status);
     }
@@ -222,13 +222,13 @@ int main(void)
     delay_ms(5);
 
     /* read data from memory device */
-    if((i2c_status = i2c_memory_read(&hi2cx, I2Cx_ADDRESS, 0, rx_buf1, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
+    if((i2c_status = i2c_memory_read(&hi2cx, I2C_MEM_ADDR_WIDIH_8, I2Cx_ADDRESS, 0x00, rx_buf1, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
     {
       error_handler(i2c_status);
     }
 
     /* write data to memory device */
-    if((i2c_status = i2c_memory_write_int(&hi2cx, I2Cx_ADDRESS, 0, tx_buf2, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
+    if((i2c_status = i2c_memory_write_int(&hi2cx, I2C_MEM_ADDR_WIDIH_8, I2Cx_ADDRESS, 0x00, tx_buf2, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
     {
       error_handler(i2c_status);
     }
@@ -242,7 +242,7 @@ int main(void)
     delay_ms(5);
 
     /* read data from memory device */
-    if((i2c_status = i2c_memory_read_int(&hi2cx, I2Cx_ADDRESS, 0, rx_buf2, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
+    if((i2c_status = i2c_memory_read_int(&hi2cx, I2C_MEM_ADDR_WIDIH_8, I2Cx_ADDRESS, 0x00, rx_buf2, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
     {
       error_handler(i2c_status);
     }
@@ -254,7 +254,7 @@ int main(void)
     }
 
     /* write data to memory device */
-    if((i2c_status = i2c_memory_write_dma(&hi2cx, I2Cx_ADDRESS, 0, tx_buf3, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
+    if((i2c_status = i2c_memory_write_dma(&hi2cx, I2C_MEM_ADDR_WIDIH_8, I2Cx_ADDRESS, 0x00, tx_buf3, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
     {
       error_handler(i2c_status);
     }
@@ -268,7 +268,7 @@ int main(void)
     delay_ms(5);
 
     /* read data from memory device */
-    if((i2c_status = i2c_memory_read_dma(&hi2cx, I2Cx_ADDRESS, 0, rx_buf3, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
+    if((i2c_status = i2c_memory_read_dma(&hi2cx, I2C_MEM_ADDR_WIDIH_8, I2Cx_ADDRESS, 0x00, rx_buf3, BUF_SIZE, I2C_TIMEOUT)) != I2C_OK)
     {
       error_handler(i2c_status);
     }
@@ -279,9 +279,9 @@ int main(void)
       error_handler(i2c_status);
     }
 
-    if((buffer_cpmpare(tx_buf1, rx_buf1, BUF_SIZE) == 0) &&
-       (buffer_cpmpare(tx_buf2, rx_buf2, BUF_SIZE) == 0) &&
-       (buffer_cpmpare(tx_buf3, rx_buf3, BUF_SIZE) == 0))
+    if((buffer_compare(tx_buf1, rx_buf1, BUF_SIZE) == 0) &&
+       (buffer_compare(tx_buf2, rx_buf2, BUF_SIZE) == 0) &&
+       (buffer_compare(tx_buf3, rx_buf3, BUF_SIZE) == 0))
     {
       at32_led_on(LED3);
     }

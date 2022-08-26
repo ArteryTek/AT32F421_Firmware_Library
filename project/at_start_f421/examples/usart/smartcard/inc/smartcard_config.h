@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     smartcard_config.h
-  * @version  v2.0.7
-  * @date     2022-06-28
+  * @version  v2.0.8
+  * @date     2022-08-16
   * @brief    header file of clock program
   **************************************************************************
   *                       Copyright notice & Disclaimer

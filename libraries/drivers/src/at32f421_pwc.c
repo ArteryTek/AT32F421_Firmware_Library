@@ -1,8 +1,8 @@
 /**
   **************************************************************************
   * @file     at32f421_pwc.c
-  * @version  v2.0.7
-  * @date     2022-06-28
+  * @version  v2.0.8
+  * @date     2022-08-16
   * @brief    contains all the functions for the pwc firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -248,7 +248,10 @@ void pwc_standby_mode_enter(void)
 #if defined (__CC_ARM)
   __force_stores();
 #endif
-  __WFI();
+  while(1)
+  {
+    __WFI();
+  }
 }
 
 /**
