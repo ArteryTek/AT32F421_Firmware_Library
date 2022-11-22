@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     at32f421_scfg.h
-  * @version  v2.0.8
-  * @date     2022-08-16
   * @brief    at32f421 system config header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -165,6 +163,7 @@ typedef enum
 {
   SCFG_PORT_SOURCE_GPIOA                 = 0x00,
   SCFG_PORT_SOURCE_GPIOB                 = 0x01,
+  SCFG_PORT_SOURCE_GPIOC                 = 0x02,
   SCFG_PORT_SOURCE_GPIOF                 = 0x05,
 
 } scfg_port_source_type;

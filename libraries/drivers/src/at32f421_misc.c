@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     at32f421_misc.c
-  * @version  v2.0.8
-  * @date     2022-08-16
   * @brief    contains all the functions for the misc firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer

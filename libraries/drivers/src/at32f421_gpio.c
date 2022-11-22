@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     at32f421_gpio.c
-  * @version  v2.0.8
-  * @date     2022-08-16
   * @brief    contains all the functions for the gpio firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer

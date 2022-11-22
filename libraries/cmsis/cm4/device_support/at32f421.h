@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     at32f421.h
-  * @version  v2.0.8
-  * @date     2022-08-16
   * @brief    at32f421 header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -58,7 +56,7 @@ extern "C" {
     !defined (AT32F421K6U7_4) && !defined (AT32F421F6P7) && !defined (AT32F421G6U7) && \
     !defined (AT32F421C4T7)   && !defined (AT32F421K4T7) && !defined (AT32F421K4U7) && \
     !defined (AT32F421K4U7_4) && !defined (AT32F421F4P7) && !defined (AT32F421G4U7) && \
-    !defined (AT32F421PF8P7)  && !defined (AT32F421PF4P7)
+    !defined (AT32F421PF8P7)  && !defined (AT32F421PF4P7)&& !defined (AT32F4212C8T7)
 
     #error "Please select first the target device used in your application (in at32f421.h file)"
 #endif
@@ -69,9 +67,33 @@ extern "C" {
     defined (AT32F421K6U7_4) || defined (AT32F421F6P7) || defined (AT32F421G6U7) || \
     defined (AT32F421C4T7)   || defined (AT32F421K4T7) || defined (AT32F421K4U7) || \
     defined (AT32F421K4U7_4) || defined (AT32F421F4P7) || defined (AT32F421G4U7) || \
-    defined (AT32F421PF8P7)  || defined (AT32F421PF4P7)
+    defined (AT32F421PF8P7)  || defined (AT32F421PF4P7)|| defined (AT32F4212C8T7)
 
     #define AT32F421xx
+#endif
+
+#if defined (AT32F421C4T7)   || defined (AT32F421C6T7) || defined (AT32F421C8T7) || \
+    defined (AT32F4212C8T7)
+
+    #define AT32F421Cx
+#endif
+
+#if defined (AT32F421K8T7) || defined (AT32F421K8U7) || defined (AT32F421K8U7_4) || \
+    defined (AT32F421K6T7) || defined (AT32F421K6U7) || defined (AT32F421K6U7_4) || \
+    defined (AT32F421K4T7) || defined (AT32F421K4U7) || defined (AT32F421K4U7_4)
+
+    #define AT32F421Kx
+#endif
+
+#if defined (AT32F421G8U7) || defined (AT32F421G6U7) || defined (AT32F421G4U7)
+
+    #define AT32F421Gx
+#endif
+
+#if defined (AT32F421F8P7) || defined (AT32F421F6P7) || defined (AT32F421F4P7) || \
+    defined (AT32F421PF8P7)|| defined (AT32F421PF4P7)
+
+    #define AT32F421Fx
 #endif
 
 #ifndef USE_STDPERIPH_DRIVER
@@ -92,8 +114,8 @@ extern "C" {
   * @brief at32f421 standard peripheral library version number
   */
 #define __AT32F421_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
-#define __AT32F421_LIBRARY_VERSION_MIDDLE   (0x00) /*!< [23:16] middle version */
-#define __AT32F421_LIBRARY_VERSION_MINOR    (0x08) /*!< [15:8]  minor version */
+#define __AT32F421_LIBRARY_VERSION_MIDDLE   (0x01) /*!< [23:16] middle version */
+#define __AT32F421_LIBRARY_VERSION_MINOR    (0x01) /*!< [15:8]  minor version */
 #define __AT32F421_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
 #define __AT32F421_LIBRARY_VERSION          ((__AT32F421_LIBRARY_VERSION_MAJOR << 24)  | \
                                              (__AT32F421_LIBRARY_VERSION_MIDDLE << 16) | \

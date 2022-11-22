@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     at32f421_int.c
-  * @version  v2.0.8
-  * @date     2022-08-16
   * @brief    main interrupt service routines.
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -31,6 +29,8 @@
 extern i2c_handle_type hi2cx;
 
 #define I2Cx_DMA_RX_TX_IRQHandler        DMA1_Channel3_2_IRQHandler
+#define I2Cx_EVT_IRQHandler              I2C1_EVT_IRQHandler
+#define I2Cx_ERR_IRQHandler              I2C1_ERR_IRQHandler
 
 /** @addtogroup AT32F421_periph_examples
   * @{
@@ -146,6 +146,26 @@ void I2Cx_DMA_RX_TX_IRQHandler(void)
 {
   i2c_dma_rx_irq_handler(&hi2cx);
   i2c_dma_tx_irq_handler(&hi2cx);
+}
+
+/**
+  * @brief  this function handles i2c event interrupt request.
+  * @param  none
+  * @retval none
+  */
+void I2Cx_EVT_IRQHandler(void)
+{
+  i2c_evt_irq_handler(&hi2cx);
+}
+
+/**
+  * @brief  this function handles i2c error interrupt request.
+  * @param  none
+  * @retval none
+  */
+void I2Cx_ERR_IRQHandler(void)
+{
+  i2c_err_irq_handler(&hi2cx);
 }
 
 /**

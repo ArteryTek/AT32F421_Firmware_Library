@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.8
-  * @date     2022-08-16
   * @brief    readme
   **************************************************************************
   */
@@ -15,4 +13,4 @@
   - connect usart2 tx pin (pa3) to usart1 rx pin (pb7)
   - connect usart2 rx pin (pa2) to usart1 tx pin (pb6)
 
-  for more detailed information. please refer to the application note document AN0099.
+  for more detailed information. please refer to the application note document AN0099.

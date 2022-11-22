@@ -1,7 +1,5 @@
 ;**************************************************************************
 ;* @file     startup_at32f421.s
-;* @version  v2.0.8
-;* @date     2022-08-16
 ;* @brief    startup_at32f421 startup file for keil
 ;* <<< Use Configuration Wizard in Context Menu >>>  
 ;**************************************************************************

@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     at32f421_spi.c
-  * @version  v2.0.8
-  * @date     2022-08-16
   * @brief    contains all the functions for the spi firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -55,11 +53,13 @@ void spi_i2s_reset(spi_type *spi_x)
     crm_periph_reset(CRM_SPI1_PERIPH_RESET, TRUE);
     crm_periph_reset(CRM_SPI1_PERIPH_RESET, FALSE);
   }
+#if defined (AT32F421Cx) || defined (AT32F421Kx) || defined (AT32F421Gx)
   else if(spi_x == SPI2)
   {
     crm_periph_reset(CRM_SPI2_PERIPH_RESET, TRUE);
     crm_periph_reset(CRM_SPI2_PERIPH_RESET, FALSE);
   }
+#endif
 }
 
 /**

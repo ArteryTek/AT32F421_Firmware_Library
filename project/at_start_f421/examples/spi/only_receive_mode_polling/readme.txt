@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     readme.txt
-  * @version  v2.0.8
-  * @date     2022-08-16
   * @brief    readme
   **************************************************************************
   */
@@ -14,4 +12,4 @@
   - pb13     <--->     pa5
   - pb15     <--->     pa7 
 
-  for more detailed information. please refer to the application note document AN0102.
+  for more detailed information. please refer to the application note document AN0102.

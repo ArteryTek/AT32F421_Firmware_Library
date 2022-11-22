@@ -1,8 +1,6 @@
 /**
   **************************************************************************
   * @file     at32f421_scfg.c
-  * @version  v2.0.8
-  * @date     2022-08-16
   * @brief    contains all the functions for the system config firmware library
   **************************************************************************
   *                       Copyright notice & Disclaimer
@@ -169,6 +167,7 @@ void scfg_tmr17_dma_channel_remap(scfg_tmr17_dma_remap_type dma_channel)
   *         this parameter can be one of the following values:
   *         - SCFG_PORT_SOURCE_GPIOA
   *         - SCFG_PORT_SOURCE_GPIOB
+  *         - SCFG_PORT_SOURCE_GPIOC
   *         - SCFG_PORT_SOURCE_GPIOF
   * @param  pin_source:
   *         specifies the exint line to be configured.
