@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>freertos_demo_421</name>
+        <name>freertos_demo</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>

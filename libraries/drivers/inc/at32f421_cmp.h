@@ -256,7 +256,7 @@ uint32_t cmp_output_value_get(cmp_sel_type cmp_sel);
 void cmp_write_protect_enable(cmp_sel_type cmp_sel);
 void cmp_filter_config(uint16_t high_pulse_cnt, uint16_t low_pulse_cnt, confirm_state new_state);
 void cmp_blanking_config(cmp_blanking_type blank_sel);
-void cmp_scal_brg_config(uint32_t scal_brg);
+void cmp_scal_brg_config(cmp_scal_brg_type scal_brg);
 
 /**
   * @}

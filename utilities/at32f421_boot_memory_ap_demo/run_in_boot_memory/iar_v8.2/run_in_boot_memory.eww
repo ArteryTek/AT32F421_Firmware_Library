@@ -3,17 +3,4 @@
     <project>
         <path>$WS_DIR$\run_in_boot_memory.ewp</path>
     </project>
-    <batchBuild>
-        <batchDefinition>
-            <name>all</name>
-            <member>
-                <project>run_in_boot_memory</project>
-                <configuration>at_start_f403a</configuration>
-            </member>
-            <member>
-                <project>run_in_boot_memory</project>
-                <configuration>at_start_f407</configuration>
-            </member>
-        </batchDefinition>
-    </batchBuild>
 </workspace>

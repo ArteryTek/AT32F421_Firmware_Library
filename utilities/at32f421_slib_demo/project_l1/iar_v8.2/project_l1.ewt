@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>at_start_f403a</name>
+        <name>project_l1</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>

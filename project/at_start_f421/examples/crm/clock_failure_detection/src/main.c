@@ -108,11 +108,11 @@ void clock_failure_detection_handler(void)
   */
 static void sclk_120m_hick_config(void)
 {
-  /* config flash psr register */
-  flash_psr_set(FLASH_WAIT_CYCLE_3);
-
   /* reset crm */
   crm_reset();
+
+  /* config flash psr register */
+  flash_psr_set(FLASH_WAIT_CYCLE_3);
 
   crm_clock_source_enable(CRM_CLOCK_SOURCE_HICK, TRUE);
 

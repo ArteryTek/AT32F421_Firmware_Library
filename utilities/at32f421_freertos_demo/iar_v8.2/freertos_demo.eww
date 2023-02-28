@@ -4,7 +4,6 @@
   <project>
     <path>$WS_DIR$\freertos_demo.ewp</path>
   </project>
-  <batchBuild/>
 </workspace>
 
 

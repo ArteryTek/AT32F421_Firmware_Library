@@ -2,7 +2,7 @@
 <project>
     <fileVersion>3</fileVersion>
     <configuration>
-        <name>boot_memmory_ap_demo</name>
+        <name>run_in_boot_memory</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>

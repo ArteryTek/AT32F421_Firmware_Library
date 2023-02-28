@@ -105,11 +105,11 @@ static void switch_system_clock(void)
   */
 static void sclk_64m_hick_config(void)
 {
-  /* config flash psr register */
-  flash_psr_set(FLASH_WAIT_CYCLE_1);
-
   /* reset crm */
   crm_reset();
+
+  /* config flash psr register */
+  flash_psr_set(FLASH_WAIT_CYCLE_1);
 
   crm_clock_source_enable(CRM_CLOCK_SOURCE_HICK, TRUE);
 
@@ -182,11 +182,11 @@ static void sclk_64m_hick_config(void)
   */
 static void sclk_96m_hext_config(void)
 {
-  /* config flash psr register */
-  flash_psr_set(FLASH_WAIT_CYCLE_2);
-
   /* reset crm */
   crm_reset();
+
+  /* config flash psr register */
+  flash_psr_set(FLASH_WAIT_CYCLE_2);
 
   crm_clock_source_enable(CRM_CLOCK_SOURCE_HEXT, TRUE);
 
