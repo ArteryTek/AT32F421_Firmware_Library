@@ -17,4 +17,4 @@
   trigger source:
   - ordinary   -->  exint line11(pa11)
   - preempt  -->  exint line15(pa15)
-  for more detailed information. please refer to the application note document AN0114.
+  for more detailed information. please refer to the application note document AN0114.

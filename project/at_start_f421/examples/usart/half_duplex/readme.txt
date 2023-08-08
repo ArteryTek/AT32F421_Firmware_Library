@@ -13,4 +13,4 @@
   - connect usart2 tx pin (pa2) to usart1 tx pin (pb6)
   - connect a pull-up resistor to this line (10k).
 
-  for more detailed information. please refer to the application note document AN0099.
+  for more detailed information. please refer to the application note document AN0099.

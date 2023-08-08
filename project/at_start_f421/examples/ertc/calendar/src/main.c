@@ -59,7 +59,7 @@ int main(void)
   system_clock_config();
 
   /* initial the nvic priority group */
-	nvic_priority_group_config(NVIC_PRIORITY_GROUP_4);
+  nvic_priority_group_config(NVIC_PRIORITY_GROUP_4);
 
   /* at board initial */
   at32_board_init();

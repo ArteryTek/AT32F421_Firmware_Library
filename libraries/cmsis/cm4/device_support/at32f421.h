@@ -72,6 +72,9 @@ extern "C" {
     #define AT32F421xx
 #endif
 
+/**
+  * define with package
+  */
 #if defined (AT32F421C4T7)   || defined (AT32F421C6T7) || defined (AT32F421C8T7) || \
     defined (AT32F4212C8T7)
 
@@ -96,6 +99,29 @@ extern "C" {
     #define AT32F421Fx
 #endif
 
+/**
+  * define with memory density
+  */
+#if defined (AT32F421C4T7)   || defined (AT32F421K4T7) || defined (AT32F421K4U7) || \
+    defined (AT32F421K4U7_4) || defined (AT32F421F4P7) || defined (AT32F421G4U7) || \
+    defined (AT32F421PF4P7)
+
+    #define AT32F421x4
+#endif
+
+#if defined (AT32F421C6T7)   || defined (AT32F421K6T7) || defined (AT32F421K6U7) || \
+    defined (AT32F421K6U7_4) || defined (AT32F421F6P7) || defined (AT32F421G6U7)
+
+    #define AT32F421x6
+#endif
+
+#if defined (AT32F421C8T7)   || defined (AT32F421K8T7) || defined (AT32F421K8U7) || \
+    defined (AT32F421K8U7_4) || defined (AT32F421F8P7) || defined (AT32F421G8U7) || \
+    defined (AT32F421PF8P7)  || defined (AT32F4212C8T7)
+
+    #define AT32F421x8
+#endif
+
 #ifndef USE_STDPERIPH_DRIVER
 /**
   * @brief comment the line below if you will not use the peripherals drivers.
@@ -115,7 +141,7 @@ extern "C" {
   */
 #define __AT32F421_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
 #define __AT32F421_LIBRARY_VERSION_MIDDLE   (0x01) /*!< [23:16] middle version */
-#define __AT32F421_LIBRARY_VERSION_MINOR    (0x02) /*!< [15:8]  minor version */
+#define __AT32F421_LIBRARY_VERSION_MINOR    (0x03) /*!< [15:8]  minor version */
 #define __AT32F421_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
 #define __AT32F421_LIBRARY_VERSION          ((__AT32F421_LIBRARY_VERSION_MAJOR << 24)  | \
                                              (__AT32F421_LIBRARY_VERSION_MIDDLE << 16) | \

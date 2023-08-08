@@ -79,7 +79,7 @@ int main(void)
 
   flash_unlock();
 
-  /* erase one sector in boot memory */
+  /* erase entire boot memory */
   flash_sector_erase(TEST_FLASH_ADDRESS_START);
 
   /* write data to boot memory */
