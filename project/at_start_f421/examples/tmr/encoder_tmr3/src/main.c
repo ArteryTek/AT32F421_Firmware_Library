@@ -29,7 +29,7 @@
   * @{
   */
 
-/** @addtogroup 421_TMR_encoder_tmr2 TMR_encoder_tmr2
+/** @addtogroup 421_TMR_encoder_tmr3 TMR_encoder_tmr3
   * @{
   */
 
@@ -90,7 +90,7 @@ int main(void)
   /* config encoder mode */
   tmr_encoder_mode_config(TMR3, TMR_ENCODER_MODE_C, TMR_INPUT_RISING_EDGE, TMR_INPUT_RISING_EDGE);
 
-  /* enable tmr2 */
+  /* enable tmr3 */
   tmr_counter_enable(TMR3, TRUE);
 
   while(1)

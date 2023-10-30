@@ -78,8 +78,8 @@ int main(void)
   /*delay to check led status*/
   delay_ms(1000);
 
-  /* enable wakeup pin1(pa0), pin2(pc13), pin6(pb5), pin7(pb15)  */
-  pwc_wakeup_pin_enable(PWC_WAKEUP_PIN_1 | PWC_WAKEUP_PIN_2 | PWC_WAKEUP_PIN_6 | PWC_WAKEUP_PIN_7, TRUE);
+  /* enable wakeup pin1 */
+  pwc_wakeup_pin_enable(PWC_WAKEUP_PIN_1, TRUE);
 
   /* enter standby mode */
   pwc_standby_mode_enter();
