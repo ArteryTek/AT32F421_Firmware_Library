@@ -143,7 +143,7 @@ void SysTick_Handler(void)
   */
 void TMR14_GLOBAL_IRQHandler(void)
 {
-  if (tmr_flag_get(TMR14, TMR_C1_FLAG) != RESET)
+  if (tmr_interrupt_flag_get(TMR14, TMR_C1_FLAG) != RESET)
   {
     /* get the input capture value */
     tmp_c4[capture_number++] = tmr_channel_value_get(TMR14, TMR_SELECT_CHANNEL_1);

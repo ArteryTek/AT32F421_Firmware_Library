@@ -107,6 +107,7 @@ static void tmr1_config(void)
   tmr_output_config_type tmr_oc_init_structure;
   crm_clocks_freq_type crm_clocks_freq_struct = {0};
   crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE);
+  gpio_pin_mux_config(GPIOA,GPIO_PINS_SOURCE8,GPIO_MUX_2);
 
   gpio_default_para_init(&gpio_initstructure);
   gpio_initstructure.gpio_mode = GPIO_MODE_MUX;

@@ -142,7 +142,7 @@ void SysTick_Handler(void)
   */
 void ERTC_IRQHandler(void)
 {
-  if(ertc_flag_get(ERTC_TSF_FLAG))
+  if(ertc_interrupt_flag_get(ERTC_TSF_FLAG))
   {
     /* display the timestamp */
     ertc_timestamp_show();

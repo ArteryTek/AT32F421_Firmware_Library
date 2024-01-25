@@ -129,7 +129,7 @@ void PendSV_Handler(void)
 
 void ADC1_CMP_IRQHandler(void)
 {
-  if(exint_flag_get(EXINT_LINE_21) != RESET)
+  if(exint_interrupt_flag_get(EXINT_LINE_21) != RESET)
   {
     /* clear exint21 flag */
     exint_flag_clear(EXINT_LINE_21);

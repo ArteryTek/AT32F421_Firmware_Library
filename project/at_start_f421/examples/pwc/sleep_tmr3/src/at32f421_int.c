@@ -139,7 +139,7 @@ void SysTick_Handler(void)
   */
 void TMR3_GLOBAL_IRQHandler(void)
 {
-  if(tmr_flag_get(TMR3, TMR_OVF_FLAG) != RESET)
+  if(tmr_interrupt_flag_get(TMR3, TMR_OVF_FLAG) != RESET)
   {
     /* clear timer 3 ovf flag */
     tmr_flag_clear(TMR3, TMR_OVF_FLAG);

@@ -141,7 +141,7 @@ extern "C" {
   */
 #define __AT32F421_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
 #define __AT32F421_LIBRARY_VERSION_MIDDLE   (0x01) /*!< [23:16] middle version */
-#define __AT32F421_LIBRARY_VERSION_MINOR    (0x04) /*!< [15:8]  minor version */
+#define __AT32F421_LIBRARY_VERSION_MINOR    (0x05) /*!< [15:8]  minor version */
 #define __AT32F421_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
 #define __AT32F421_LIBRARY_VERSION          ((__AT32F421_LIBRARY_VERSION_MAJOR << 24)  | \
                                              (__AT32F421_LIBRARY_VERSION_MIDDLE << 16) | \
@@ -212,7 +212,7 @@ typedef enum IRQn
     USART1_IRQn                 = 27,     /*!< usart1 global interrupt                              */
     USART2_IRQn                 = 28,     /*!< usart2 global interrupt                              */
     I2C1_ERR_IRQn               = 32,     /*!< i2c1 error interrupt                                 */
-    I2C2_ERR_IRQn               = 34,     /*!< i2c2 error interrupt                                 */
+    I2C2_ERR_IRQn               = 34      /*!< i2c2 error interrupt                                 */
 
 } IRQn_Type;
 
