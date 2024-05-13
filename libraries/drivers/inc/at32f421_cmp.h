@@ -82,6 +82,8 @@ typedef enum
   CMP_SPEED_ULTRALOW                     = 0x03  /*!< comparator selected ultralow speed */
 } cmp_speed_type;
 
+#define  CMP_OUTPUT_TMR1CXORAW_OFF       CMP_OUTPUT_TMR1CHCLR
+#define  CMP_OUTPUT_TMR3CXORAW_OFF       CMP_OUTPUT_TMR3CHCLR
 /**
   * @brief cmp output type
   */

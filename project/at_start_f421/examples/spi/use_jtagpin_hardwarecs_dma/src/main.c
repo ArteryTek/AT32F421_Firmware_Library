@@ -95,7 +95,7 @@ static void spi_config(void)
   dma_init_struct.memory_base_addr = (uint32_t)spi2_rx_buffer;
   dma_init_struct.memory_data_width = DMA_MEMORY_DATA_WIDTH_BYTE;
   dma_init_struct.memory_inc_enable = TRUE;
-  dma_init_struct.peripheral_base_addr = (uint32_t)0x4000380C;
+  dma_init_struct.peripheral_base_addr = (uint32_t)&(SPI2->dt);
   dma_init_struct.peripheral_data_width = DMA_PERIPHERAL_DATA_WIDTH_BYTE;
   dma_init_struct.peripheral_inc_enable = FALSE;
   dma_init_struct.priority = DMA_PRIORITY_MEDIUM;
@@ -104,17 +104,17 @@ static void spi_config(void)
 
   dma_init_struct.direction = DMA_DIR_MEMORY_TO_PERIPHERAL;
   dma_init_struct.memory_base_addr = (uint32_t)spi2_tx_buffer;
-  dma_init_struct.peripheral_base_addr = (uint32_t)0x4000380C;
+  dma_init_struct.peripheral_base_addr = (uint32_t)&(SPI2->dt);
   dma_init(DMA1_CHANNEL5, &dma_init_struct);
 
   dma_init_struct.direction = DMA_DIR_PERIPHERAL_TO_MEMORY;
   dma_init_struct.memory_base_addr = (uint32_t)spi1_rx_buffer;
-  dma_init_struct.peripheral_base_addr = (uint32_t)0x4001300C;
+  dma_init_struct.peripheral_base_addr = (uint32_t)&(SPI1->dt);
   dma_init(DMA1_CHANNEL2, &dma_init_struct);
 
   dma_init_struct.direction = DMA_DIR_MEMORY_TO_PERIPHERAL;
   dma_init_struct.memory_base_addr = (uint32_t)spi1_tx_buffer;
-  dma_init_struct.peripheral_base_addr = (uint32_t)0x4001300C;
+  dma_init_struct.peripheral_base_addr = (uint32_t)&(SPI1->dt);
   dma_init(DMA1_CHANNEL3, &dma_init_struct);
 
 
