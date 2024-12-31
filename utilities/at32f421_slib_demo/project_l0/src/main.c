@@ -38,14 +38,14 @@ extern float32_t refOutput[];
   * @{
   */
 
-#define USE_SLIB_FUNCTION       /* define it when user want to activate slib in this project */
+//#define USE_SLIB_FUNCTION       /* define it when user want to activate slib in this project */
 
 #if defined (USE_SLIB_FUNCTION)
 #define FLASH_START_ADDR                 0x08000000
 #define TEST_SLIB_PSW                    0x55665566
-#define SLIB_START_ADDR                  0x08001000
-#define SLIB_INST_ADDR                   0x08003000
-#define SLIB_END_ADDR                    0x08004C00
+#define SLIB_START_ADDR                  0x0800C000
+#define SLIB_INST_ADDR                   0x0800F000
+#define SLIB_END_ADDR                    0x0800FC00
 #define FLASH_SECTOR_SIZE                0x400
 #define SECTOR_NUM(dwAddr)               ((dwAddr & (FLASH_START_ADDR - 1)) / FLASH_SECTOR_SIZE)
 #define SECTOR_WORD_CNT                  (FLASH_SECTOR_SIZE >> 2)    /* words per sector */

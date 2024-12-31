@@ -184,8 +184,8 @@ int main(void)
     /* turn on the led light */
     at32_led_on(LED2);
 
-    /* wait clock stable */
-    delay_us(120);
+    /* wait 3 LICK cycles to ensure clock stable */
+    delay_us(8);
 
     /* wake up from deep sleep mode, congfig the system clock */
     system_clock_recover();

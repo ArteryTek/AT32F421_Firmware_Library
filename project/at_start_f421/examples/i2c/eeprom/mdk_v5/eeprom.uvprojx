@@ -397,6 +397,11 @@
               <FileType>1</FileType>
               <FilePath>..\src\main.c</FilePath>
             </File>
+            <File>
+              <FileName>eeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\eeprom.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
