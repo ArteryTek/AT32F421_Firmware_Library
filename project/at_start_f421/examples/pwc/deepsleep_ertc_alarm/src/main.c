@@ -3,7 +3,8 @@
   * @file     main.c
   * @brief    main program
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  *
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -164,14 +165,17 @@ void system_clock_recover(void)
   */
 int main(void)
 {
+  crm_clocks_freq_type crm_clocks_freq_struct = {0};
   __IO uint32_t systick_index = 0;
-  __IO uint32_t delay_index = 0;
 
   /* enable pwc and bpr clock */
   crm_periph_clock_enable(CRM_PWC_PERIPH_CLOCK, TRUE);
 
   /* congfig the system clock */
   system_clock_config();
+  
+  /* get system clock */
+  crm_clocks_freq_get(&crm_clocks_freq_struct);
 
   /* init at start board */
   at32_board_init();
@@ -216,8 +220,18 @@ int main(void)
     /* turn on the led light */
     at32_led_on(LED2);
 
-    /* wait 3 LICK cycles to ensure clock stable */
-    delay_us(8);
+    /* wait 3 LICK(maximum 120us) cycles to ensure clock stable */
+    /* when wakeup from deepsleep,system clock source changes to HICK */
+    if((CRM->misc2_bit.hick_to_sclk == TRUE) && (CRM->misc1_bit.hickdiv == TRUE))
+    {
+      /* HICK is 48MHz */
+      delay_us(((120 * 6 * HICK_VALUE) /crm_clocks_freq_struct.sclk_freq) + 1);
+    }
+    else
+    {
+      /* HICK is 8MHz */
+      delay_us(((120 * HICK_VALUE) /crm_clocks_freq_struct.sclk_freq) + 1);
+    }
 
     /* wake up from deep sleep mode, congfig the system clock */
     system_clock_recover();

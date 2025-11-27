@@ -3,7 +3,8 @@
   * @file     at32f421_ertc.c
   * @brief    contains all the functions for the ertc firmware library
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  *
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -640,6 +641,7 @@ void ertc_alarm_get(ertc_alarm_type alarm_x, ertc_alarm_value_type* alarm)
   */
 uint32_t ertc_alarm_sub_second_get(ertc_alarm_type alarm_x)
 {
+  UNUSED(alarm_x);
   return (ERTC->alasbs_bit.sbs);
 }
 

@@ -3,7 +3,8 @@
   * @file     main.c
   * @brief    main program
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  *
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -44,10 +45,6 @@ uint16_t i2s1_buffer_tx[32] = {0x0102, 0x0304, 0x0506, 0x0708, 0x090A, 0x0B0C,
 uint16_t i2s2_buffer_rx[32];
 volatile error_status transfer_status = ERROR;
 
-static void gpio_config(void);
-static void i2s_config(void);
-error_status buffer_compare(uint16_t* pbuffer1, uint16_t* pbuffer2, uint16_t buffer_length);
-
 /**
   * @brief  buffer_compare function.
   * @param  none
@@ -69,17 +66,18 @@ error_status buffer_compare(uint16_t* pbuffer1, uint16_t* pbuffer2, uint16_t buf
 }
 
 /**
-  * @brief  i2s configuration.
+  * @brief  dma configuration.
   * @param  none
   * @retval none
   */
-static void i2s_config(void)
+static void dma_config(void)
 {
   dma_init_type dma_init_struct;
-  i2s_init_type i2s_init_struct;
 
   crm_periph_clock_enable(CRM_DMA1_PERIPH_CLOCK, TRUE);
-  dma_reset(DMA1_CHANNEL4);
+  
+  /* use dma1_channel3 as spi1 transmit channel */
+  dma_reset(DMA1_CHANNEL3);
   dma_default_para_init(&dma_init_struct);
   dma_init_struct.buffer_size = 32;
   dma_init_struct.direction = DMA_DIR_MEMORY_TO_PERIPHERAL;
@@ -92,15 +90,36 @@ static void i2s_config(void)
   dma_init_struct.priority = DMA_PRIORITY_HIGH;
   dma_init_struct.loop_mode_enable = FALSE;
   dma_init(DMA1_CHANNEL3, &dma_init_struct);
-
+  
+  /* use dma1_channel4 as spi2 receive channel */
+  dma_reset(DMA1_CHANNEL4);
+  dma_init_struct.buffer_size = 32;
   dma_init_struct.direction = DMA_DIR_PERIPHERAL_TO_MEMORY;
   dma_init_struct.memory_base_addr = (uint32_t)i2s2_buffer_rx;
+  dma_init_struct.memory_data_width = DMA_MEMORY_DATA_WIDTH_HALFWORD;
+  dma_init_struct.memory_inc_enable = TRUE;
   dma_init_struct.peripheral_base_addr = (uint32_t)&(SPI2->dt);
+  dma_init_struct.peripheral_data_width = DMA_PERIPHERAL_DATA_WIDTH_HALFWORD;
+  dma_init_struct.peripheral_inc_enable = FALSE;
+  dma_init_struct.priority = DMA_PRIORITY_HIGH;
+  dma_init_struct.loop_mode_enable = FALSE;
   dma_init(DMA1_CHANNEL4, &dma_init_struct);
+}
 
+/**
+  * @brief  i2s configuration.
+  * @param  none
+  * @retval none
+  */
+static void i2s_config(void)
+{
+  i2s_init_type i2s_init_struct;
+  
+  /* master i2s initialization */
   crm_periph_clock_enable(CRM_SPI1_PERIPH_CLOCK, TRUE);
-  crm_periph_clock_enable(CRM_SPI2_PERIPH_CLOCK, TRUE);
   i2s_default_para_init(&i2s_init_struct);
+  
+  /* master transmission mode */
   i2s_init_struct.audio_protocol = I2S_AUDIO_PROTOCOL_PHILLIPS;
   i2s_init_struct.data_channel_format = I2S_DATA_16BIT_CHANNEL_32BIT;
   i2s_init_struct.mclk_output_enable = TRUE;
@@ -108,17 +127,27 @@ static void i2s_config(void)
   i2s_init_struct.clock_polarity = I2S_CLOCK_POLARITY_LOW;
   i2s_init_struct.operation_mode = I2S_MODE_MASTER_TX;
   i2s_init(SPI1, &i2s_init_struct);
-
-  i2s_init_struct.operation_mode =I2S_MODE_SLAVE_RX;
+  
+  /* use dma transmit */
+  spi_i2s_dma_transmitter_enable(SPI1, TRUE);
+  
+  i2s_enable(SPI1, TRUE);
+  
+  /* slave i2s initialization */
+  crm_periph_clock_enable(CRM_SPI2_PERIPH_CLOCK, TRUE);
+  
+  /* slave reception mode */
+  i2s_init_struct.audio_protocol = I2S_AUDIO_PROTOCOL_PHILLIPS;
+  i2s_init_struct.data_channel_format = I2S_DATA_16BIT_CHANNEL_32BIT;
+  i2s_init_struct.mclk_output_enable = TRUE;
+  i2s_init_struct.audio_sampling_freq = I2S_AUDIO_FREQUENCY_48K;
+  i2s_init_struct.clock_polarity = I2S_CLOCK_POLARITY_LOW;
+  i2s_init_struct.operation_mode = I2S_MODE_SLAVE_RX;
   i2s_init(SPI2, &i2s_init_struct);
 
+  /* use dma receive */
   spi_i2s_dma_receiver_enable(SPI2, TRUE);
-  spi_i2s_dma_transmitter_enable(SPI1, TRUE);
-
-  dma_channel_enable(DMA1_CHANNEL4, TRUE);
-  dma_channel_enable(DMA1_CHANNEL3, TRUE);
-
-  i2s_enable(SPI1, TRUE);
+  
   i2s_enable(SPI2, TRUE);
 }
 
@@ -132,73 +161,54 @@ static void gpio_config(void)
   gpio_init_type gpio_initstructure;
   crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE);
   crm_periph_clock_enable(CRM_GPIOB_PERIPH_CLOCK, TRUE);
-
-  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE4, GPIO_MUX_0);
-  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE5, GPIO_MUX_0);
-  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE6, GPIO_MUX_0);
-  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE7, GPIO_MUX_0);
-  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE12, GPIO_MUX_0);
-  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE13, GPIO_MUX_0);
-  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE14, GPIO_MUX_0);
-  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE15, GPIO_MUX_0);
-
   gpio_default_para_init(&gpio_initstructure);
-
-  gpio_initstructure.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
-  gpio_initstructure.gpio_pull           = GPIO_PULL_DOWN;
-  gpio_initstructure.gpio_mode           = GPIO_MODE_MUX;
-  gpio_initstructure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
-  gpio_initstructure.gpio_pins           = GPIO_PINS_4;
+  
+  /* master i2s ws pin */
+  gpio_initstructure.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+  gpio_initstructure.gpio_pull = GPIO_PULL_DOWN;
+  gpio_initstructure.gpio_mode = GPIO_MODE_MUX;
+  gpio_initstructure.gpio_pins = GPIO_PINS_4;
   gpio_init(GPIOA, &gpio_initstructure);
+  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE4, GPIO_MUX_0);
 
-  gpio_initstructure.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
-  gpio_initstructure.gpio_pull           = GPIO_PULL_DOWN;
-  gpio_initstructure.gpio_mode           = GPIO_MODE_MUX;
-  gpio_initstructure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
-  gpio_initstructure.gpio_pins           = GPIO_PINS_5;
+  /* master i2s ck pin */
+  gpio_initstructure.gpio_pull = GPIO_PULL_DOWN;
+  gpio_initstructure.gpio_pins = GPIO_PINS_5;
   gpio_init(GPIOA, &gpio_initstructure);
+  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE5, GPIO_MUX_0);
 
-  gpio_initstructure.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
-  gpio_initstructure.gpio_pull           = GPIO_PULL_DOWN;
-  gpio_initstructure.gpio_mode           = GPIO_MODE_MUX;
-  gpio_initstructure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
-  gpio_initstructure.gpio_pins           = GPIO_PINS_6;
+  /* master i2s mck pin */
+  gpio_initstructure.gpio_pull = GPIO_PULL_DOWN;
+  gpio_initstructure.gpio_pins = GPIO_PINS_6;
   gpio_init(GPIOA, &gpio_initstructure);
+  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE6, GPIO_MUX_0);
 
-  gpio_initstructure.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
-  gpio_initstructure.gpio_pull           = GPIO_PULL_DOWN;
-  gpio_initstructure.gpio_mode           = GPIO_MODE_MUX;
-  gpio_initstructure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
-  gpio_initstructure.gpio_pins           = GPIO_PINS_7;
+  /* master i2s sd pin */
+  gpio_initstructure.gpio_pull = GPIO_PULL_DOWN;
+  gpio_initstructure.gpio_pins = GPIO_PINS_7;
   gpio_init(GPIOA, &gpio_initstructure);
+  gpio_pin_mux_config(GPIOA, GPIO_PINS_SOURCE7, GPIO_MUX_0);
 
-  gpio_initstructure.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
-  gpio_initstructure.gpio_pull           = GPIO_PULL_DOWN;
-  gpio_initstructure.gpio_mode           = GPIO_MODE_MUX;
+  /* slave i2s ws pin */
+  gpio_initstructure.gpio_out_type = GPIO_OUTPUT_PUSH_PULL;
+  gpio_initstructure.gpio_pull = GPIO_PULL_DOWN;
+  gpio_initstructure.gpio_mode = GPIO_MODE_MUX;
   gpio_initstructure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
-  gpio_initstructure.gpio_pins           = GPIO_PINS_12;
+  gpio_initstructure.gpio_pins = GPIO_PINS_12;
   gpio_init(GPIOB, &gpio_initstructure);
+  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE12, GPIO_MUX_0);
+  
+  /* slave i2s ck pin */
+  gpio_initstructure.gpio_pull = GPIO_PULL_DOWN;
+  gpio_initstructure.gpio_pins = GPIO_PINS_13;
+  gpio_init(GPIOB, &gpio_initstructure);
+  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE13, GPIO_MUX_0);
 
-  gpio_initstructure.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
-  gpio_initstructure.gpio_pull           = GPIO_PULL_DOWN;
-  gpio_initstructure.gpio_mode           = GPIO_MODE_MUX;
-  gpio_initstructure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
-  gpio_initstructure.gpio_pins           = GPIO_PINS_13;
+  /* slave i2s sd pin */
+  gpio_initstructure.gpio_pull = GPIO_PULL_DOWN;
+  gpio_initstructure.gpio_pins = GPIO_PINS_15;
   gpio_init(GPIOB, &gpio_initstructure);
-
-  gpio_initstructure.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
-  gpio_initstructure.gpio_pull           = GPIO_PULL_DOWN;
-  gpio_initstructure.gpio_mode           = GPIO_MODE_MUX;
-  gpio_initstructure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
-  gpio_initstructure.gpio_pins           = GPIO_PINS_14;
-  gpio_init(GPIOB, &gpio_initstructure);
-
-  gpio_initstructure.gpio_out_type       = GPIO_OUTPUT_PUSH_PULL;
-  gpio_initstructure.gpio_pull           = GPIO_PULL_DOWN;
-  gpio_initstructure.gpio_mode           = GPIO_MODE_MUX;
-  gpio_initstructure.gpio_drive_strength = GPIO_DRIVE_STRENGTH_STRONGER;
-  gpio_initstructure.gpio_pins           = GPIO_PINS_15;
-  gpio_init(GPIOB, &gpio_initstructure);
+  gpio_pin_mux_config(GPIOB, GPIO_PINS_SOURCE15, GPIO_MUX_0);
 }
 
 /**
@@ -210,14 +220,25 @@ int main(void)
 {
   system_clock_config();
   at32_board_init();
-  at32_led_off(LED2);
-  at32_led_off(LED3);
-  at32_led_off(LED4);
+  at32_led_on(LED4);
   gpio_config();
+  dma_config();
   i2s_config();
+  
+  /* enable i2s slave dma to get data */
+  dma_channel_enable(DMA1_CHANNEL4, TRUE);
+  
+  /* enable i2s master dma to fill data */
+  dma_channel_enable(DMA1_CHANNEL3, TRUE);
 
-  while(dma_flag_get(DMA1_FDT3_FLAG) == RESET);
-  while(dma_flag_get(DMA1_FDT4_FLAG) == RESET);
+  /* wait slave i2s data receive end */
+  while(dma_flag_get(DMA1_FDT4_FLAG) == RESET)
+  {
+  }
+  
+  /* wait master and slave idle when communication end */
+  while(spi_i2s_flag_get(SPI1, SPI_I2S_BF_FLAG) != RESET);
+  while(spi_i2s_flag_get(SPI2, SPI_I2S_BF_FLAG) != RESET);
 
   /* test result:the data check */
   transfer_status = buffer_compare(i2s2_buffer_rx, i2s1_buffer_tx, 32);
@@ -229,7 +250,7 @@ int main(void)
   }
   else
   {
-    at32_led_off(LED2);
+    at32_led_on(LED3);
   }
   while(1)
   {

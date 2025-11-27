@@ -3,7 +3,8 @@
   * @file     at32f421_i2c.c
   * @brief    contains all the functions for the i2c firmware library
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  *
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -684,7 +685,7 @@ flag_status i2c_interrupt_flag_get(i2c_type *i2c_x, uint32_t flag)
   * @brief  clear flag status
   * @param  i2c_x: to select the i2c peripheral.
   *         this parameter can be one of the following values:
-  *         I2C1, I2C2, I2C3.
+  *         I2C1, I2C2.
   * @param  flag
   *         this parameter can be any combination of the following values:
   *         - I2C_BUSERR_FLAG: bus error flag.

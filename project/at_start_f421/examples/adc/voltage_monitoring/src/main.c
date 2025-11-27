@@ -3,7 +3,8 @@
   * @file     main.c
   * @brief    main program
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  *
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -37,10 +38,7 @@
 
 __IO uint16_t adc1_ordinary_valuetab[3] = {0};
 __IO uint16_t vmor_flag_index = 0;
-
-static void gpio_config(void);
-static void dma_config(void);
-static void adc_config(void);
+__IO uint16_t error_times_index = 0;
 
 /**
   * @brief  gpio configuration.
@@ -80,8 +78,6 @@ static void dma_config(void)
   dma_init_struct.priority = DMA_PRIORITY_HIGH;
   dma_init_struct.loop_mode_enable = TRUE;
   dma_init(DMA1_CHANNEL1, &dma_init_struct);
-
-  dma_channel_enable(DMA1_CHANNEL1, TRUE);
 }
 
 /**
@@ -93,9 +89,11 @@ static void adc_config(void)
 {
   adc_base_config_type adc_base_struct;
   crm_periph_clock_enable(CRM_ADC1_PERIPH_CLOCK, TRUE);
-  crm_adc_clock_div_set(CRM_ADC_DIV_6);
+  adc_reset(ADC1);
   nvic_irq_enable(ADC1_CMP_IRQn, 0, 0);
+  crm_adc_clock_div_set(CRM_ADC_DIV_6);
 
+  /* ADC1 config */
   adc_base_default_para_init(&adc_base_struct);
   adc_base_struct.sequence_mode = TRUE;
   adc_base_struct.repeat_mode = FALSE;
@@ -113,10 +111,27 @@ static void adc_config(void)
   adc_interrupt_enable(ADC1, ADC_VMOR_INT, TRUE);
 
   adc_enable(ADC1, TRUE);
+
+  /* ADC calibration */
   adc_calibration_init(ADC1);
   while(adc_calibration_init_status_get(ADC1));
   adc_calibration_start(ADC1);
   while(adc_calibration_status_get(ADC1));
+}
+
+/**
+  * @brief  this function handles adc1_2 handler.
+  * @param  none
+  * @retval none
+  */
+void ADC1_CMP_IRQHandler(void)
+{
+  if(adc_interrupt_flag_get(ADC1, ADC_VMOR_FLAG) != RESET)
+  {
+    at32_led_toggle(LED3);
+    adc_flag_clear(ADC1, ADC_VMOR_FLAG);
+    vmor_flag_index++;
+  }
 }
 
 /**
@@ -126,7 +141,6 @@ static void adc_config(void)
   */
 int main(void)
 {
-  __IO uint32_t index = 0;
   nvic_priority_group_config(NVIC_PRIORITY_GROUP_4);
   system_clock_config();
   at32_board_init();
@@ -137,14 +151,19 @@ int main(void)
   gpio_config();
   dma_config();
   adc_config();
+
+  /* enable DMA after ADC activation */
+  dma_channel_enable(DMA1_CHANNEL1, TRUE);
+
   printf("voltage_monitoring \r\n");
   while(1)
   {
     at32_led_toggle(LED2);
     delay_sec(1);
-    if(vmor_flag_index == 1)
+    if(error_times_index != vmor_flag_index)
     {
-      vmor_flag_index = 0;
+      error_times_index = vmor_flag_index;
+      printf("error_times_index = %d\r\n",error_times_index);
       printf("out of range:adc1_channel_5 value is = %x!\r\n", adc1_ordinary_valuetab[1]);
     }
     adc_ordinary_software_trigger_enable(ADC1, TRUE);

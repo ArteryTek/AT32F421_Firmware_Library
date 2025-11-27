@@ -3,7 +3,8 @@
   * @file     at32f421_usart.c
   * @brief    contains all the functions for the usart firmware library
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  *
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -71,7 +72,7 @@ void usart_reset(usart_type* usart_x)
   *         this parameter can be one of the following values:
   *         - USART_DATA_8BITS
   *         - USART_DATA_9BITS.
-  *         note：
+  *         note:
   *         - when parity check is disabled, the data bit width is the actual data bit number.
   *         - when parity check is enabled, the data bit width is the actual data bit number minus 1, and the MSB bit is replaced with the parity bit.
   * @param  stop_bit: stop bits transmitted
@@ -538,7 +539,7 @@ void usart_transmit_receive_pin_swap(usart_type* usart_x, confirm_state new_stat
   *         USART1 or USART2.
   * @param  flag: specifies the flag to check.
   *         this parameter can be one of the following values:
-  *         - USART_CTSCF_FLAG: cts change flag (not available for UART4,UART5,USART6,UART7 and UART8)
+  *         - USART_CTSCF_FLAG: cts change flag 
   *         - USART_BFF_FLAG:   break frame flag
   *         - USART_TDBE_FLAG:  transmit data buffer empty flag
   *         - USART_TDC_FLAG:   transmit data complete flag
@@ -569,7 +570,7 @@ flag_status usart_flag_get(usart_type* usart_x, uint32_t flag)
   *         USART1 or USART2.
   * @param  flag: specifies the flag to check.
   *         this parameter can be one of the following values:
-  *         - USART_CTSCF_FLAG: cts change flag (not available for UART4,UART5)
+  *         - USART_CTSCF_FLAG: cts change flag 
   *         - USART_BFF_FLAG:   break frame flag
   *         - USART_TDBE_FLAG:  transmit data buffer empty flag
   *         - USART_TDC_FLAG:   transmit data complete flag
@@ -642,7 +643,7 @@ flag_status usart_interrupt_flag_get(usart_type* usart_x, uint32_t flag)
   *         USART1 or USART2.
   * @param  flag: specifies the flag to clear.
   *         this parameter can be any combination of the following values:
-  *         - USART_CTSCF_FLAG: (not available for UART4,UART5,USART6,UART7 and UART8).
+  *         - USART_CTSCF_FLAG: 
   *         - USART_BFF_FLAG:
   *         - USART_TDC_FLAG:
   *         - USART_RDBF_FLAG:

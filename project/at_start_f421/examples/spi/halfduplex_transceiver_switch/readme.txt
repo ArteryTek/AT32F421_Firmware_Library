@@ -10,7 +10,9 @@
   realize data send and receive.  
   the pins connection as follow:
   - spi2 slaver        spi1 master
+  - pb12     <--->     pa4
   - pb13     <--->     pa5
   - pb14     <--->     pa7
 
-  for more detailed information. please refer to the application note document AN0102.
+  for more detailed information. please refer to the application note document AN0102.
+

@@ -3,7 +3,8 @@
   * @file     at32f421_adc.c
   * @brief    contains all the functions for the adc firmware library
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  *
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -450,14 +451,7 @@ void adc_preempt_channel_set(adc_type *adc_x, adc_channel_select_type adc_channe
   */
 void adc_ordinary_conversion_trigger_set(adc_type *adc_x, adc_ordinary_trig_select_type adc_ordinary_trig, confirm_state new_state)
 {
-  if(adc_ordinary_trig > 7)
-  {
-    adc_x->ctrl2_bit.octesel = adc_ordinary_trig & 0x7;
-  }
-  else
-  {
-    adc_x->ctrl2_bit.octesel = adc_ordinary_trig & 0x7;
-  }
+  adc_x->ctrl2_bit.octesel = adc_ordinary_trig & 0x7;
   adc_x->ctrl2_bit.octen = new_state;
 }
 
@@ -478,14 +472,7 @@ void adc_ordinary_conversion_trigger_set(adc_type *adc_x, adc_ordinary_trig_sele
   */
 void adc_preempt_conversion_trigger_set(adc_type *adc_x, adc_preempt_trig_select_type adc_preempt_trig, confirm_state new_state)
 {
-  if(adc_preempt_trig > 7)
-  {
-    adc_x->ctrl2_bit.pctesel = adc_preempt_trig & 0x7;
-  }
-  else
-  {
-    adc_x->ctrl2_bit.pctesel = adc_preempt_trig & 0x7;
-  }
+  adc_x->ctrl2_bit.pctesel = adc_preempt_trig & 0x7;
   adc_x->ctrl2_bit.pcten = new_state;
 }
 

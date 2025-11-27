@@ -3,7 +3,8 @@
   * @file     at32f421_ertc.h
   * @brief    at32f421 ertc header file
   **************************************************************************
-  *                       Copyright notice & Disclaimer
+  *
+  * Copyright (c) 2025, Artery Technology, All rights reserved.
   *
   * The software Board Support Package (BSP) that is made available to
   * download from Artery official website is the copyrighted work of Artery.
@@ -210,7 +211,6 @@ typedef enum
 {
   ERTC_OUTPUT_DISABLE                    = 0x00, /*!< diable output */
   ERTC_OUTPUT_ALARM_A                    = 0x01, /*!< output alarm a event */
-  ERTC_OUTPUT_WAKEUP                     = 0x03  /*!< output wakeup event */
 } ertc_output_source_type;
 
 /**

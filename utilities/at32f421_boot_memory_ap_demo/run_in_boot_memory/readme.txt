@@ -5,7 +5,7 @@
   **************************************************************************
   */
 
-  this demo is based on the at-start board, executing this project£¬step1/step2
+  this demo is based on the at-start board, executing this project, step1/step2
   should be follow.
   step1 : enbale ap mode by icp tool. user should set boot memory to ap mode
           with icp tool.
